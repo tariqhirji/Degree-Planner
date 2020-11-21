@@ -24,14 +24,12 @@ class App extends Component{
    render(){
       const { signedIn } = this.props;
 
-      const Home = (signedIn) ?  <Home/> : <Landing/> 
-
       return (
          <div className="App">
             <BrowserRouter>
-               <Navbar/>
+            {!signedIn?<Navbar/>:null}
                <Switch>
-                  <Route exact path='/' render={() => Home}/>
+                  <Route exact path='/' render={() => (signedIn) ?  <Home/> : <Landing/> }/>
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
