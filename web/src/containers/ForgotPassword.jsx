@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { forgotPassword } from '../routes/authRoutes';
-import './css/ForgotPassword.css'
+import './css/ForgotPassword.css';
 
 class ForgotPassword extends Component{
     constructor(){
@@ -57,28 +57,7 @@ class ForgotPassword extends Component{
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-            // <div>
-            //     {submitted?
-            //         (<h1>
-            //             If email is registered it has been sent
-            //         </h1>) :
-            //         (<form onSubmit={this.handleSubmit}>
-            //             <input
-            //                 name = 'email'
-            //                 type='text'
-            //                 value={email}
-            //                 onChange={this.handleChange}
-            //                 required
-            //             />
-      
-            //             <button>
-            //                 Submit
-            //             </button>
-            //         </form>)
-            //     }
-            // </div>
         )
     }
 }
