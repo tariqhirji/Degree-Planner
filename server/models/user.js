@@ -13,6 +13,11 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String
         }
+
+        university: {
+            type: String,
+        }
+
     },
     {timestamps: true}
 );

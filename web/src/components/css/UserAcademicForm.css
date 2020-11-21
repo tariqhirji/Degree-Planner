@@ -1,0 +1,35 @@
+.change-password{
+    width: 100px;
+    height: 90px;
+    background-color: #4f2683;
+    box-shadow: 0 0 8px 5px rgba(55,55,55,1);
+    border-radius: 10px;
+    color:whitesmoke; 
+    
+}
+
+.academics-form{
+    margin: auto;
+    text-align: center;
+    width: 500px;
+    padding: 20px;
+    background-color: #4f2683;
+    box-shadow: 0 0 8px 5px rgba(55,55,55,1);
+    border-radius: 10px;
+    color:whitesmoke;
+}
+
+.input{
+    padding: 30px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+}
+
+.btn-block{
+    padding: 5px;
+}
+
+.my-auto{
+    margin: 10px;
+}
