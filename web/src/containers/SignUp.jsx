@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { signup } from '../routes/authRoutes';
 import './css/SignUp.css';
+
 class SignUp extends Component{
     constructor(){
         super();
@@ -51,8 +52,9 @@ class SignUp extends Component{
                     <div className = "form-group">
                         <label for="username">Confirm Password</label>
                         <input onChange = {this.handleChange} type = "password" className="form-control" id = "confirmpassword" name= "confirmpassword" required></input>
+                        <input type = "text" className="form-control" id = "username" required></input>
                     </div>
-
+             
                     <br></br>
                     <button type="submit" className="btn btn-success">Sign Up</button>
                 </form>
