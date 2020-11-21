@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
             type: Number
         },
         department:{
-            type: []
+            type: ''
         }
 
     },

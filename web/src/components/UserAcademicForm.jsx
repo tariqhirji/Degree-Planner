@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/UserAcademicForm.css'
+import {academia} from '../routes/userRoutes';
 
 class UserAcademicForm extends Component{
     constructor(){
@@ -8,7 +9,7 @@ class UserAcademicForm extends Component{
             university: '',
             year: Number,
             degree: '',
-            dept: [],
+            dept: '',
             coursesTaken: []
         }
         this.handleChange = this.handleChange.bind(this);
@@ -22,6 +23,20 @@ class UserAcademicForm extends Component{
 
     async handleSubmit(e){
         e.preventDefault();
+        const{university, year, degree, dept, coursesTaken}= this.state;
+        const data = {
+            university: university,
+            yearOfStudy: year,
+            degree: degree,
+            department: dept,
+            coursesTaken: coursesTaken
+        };
+        const response = await academia(data);
+        if(!response){
+            alert("Error updating Academic Infomation!");
+        }else{
+            alert("Successfully updated Academic Infomation");
+        }
     }
 
     toChangePassword(){
@@ -56,7 +71,7 @@ class UserAcademicForm extends Component{
 
                     <label className='degree'>Degree </label>
                     <input
-                        type='number'
+                        type='text'
                         name='degree'
                         value={degree}
                         required
