@@ -7,6 +7,7 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
+import UserAcademicForm from './components/UserAcademicForm.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
              <Route exact path ='/register' component={SignUp}/>
              <Route exact path ='/change_password/:token' component={ChangePassword}/>
              <Route exact path='/forgot_password' component={ForgotPassword}/> 
+             <Route exact path='/user_settings' component={UserAcademicForm}/>
              <Route path='/' component={DeadPage}/>
           </Switch>
        </BrowserRouter>
