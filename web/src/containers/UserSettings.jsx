@@ -11,7 +11,6 @@ class UserSettings extends Component{
         return(
             <div className='settings'>
                 <h1>Settings </h1>
-
                 <UserAcademicForm/>
             </div>
         )

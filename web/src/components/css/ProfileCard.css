@@ -1,0 +1,14 @@
+.ProfileCard {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.profileBtn {
+    background-color: #4f2683;
+    color: white;
+}
+
+.profileBtn:hover {
+    background-color: #4f2683;
+    color: white;
+    opacity: 0.8;
+}

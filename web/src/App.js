@@ -10,6 +10,7 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
+import Profile from './containers/Profile'
 import UserAcademicForm from './components/UserAcademicForm.jsx';
 import Home from './containers/Home'
 import DepartmentInfo from './containers/DepartmentInfo';
@@ -32,6 +33,7 @@ class App extends Component{
                {!signedIn? <Navbar/> : null}
                <Switch>
                   <Route exact path='/' render={() => (signedIn)? <Home/> : <Landing/> }/>
+                  <Route exact path='/profile' component={Profile}/> 
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/departments' component={DepartmentInfo}/>

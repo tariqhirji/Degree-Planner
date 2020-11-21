@@ -1,0 +1,10 @@
+.Profile {
+    height: 100vh;
+    background-color:lightgrey;
+    color: #4f2683;
+}
+
+.ProfileContent {
+    height: 100%;
+    margin-left: 240px;
+}
