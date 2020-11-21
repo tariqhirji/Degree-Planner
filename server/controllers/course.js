@@ -1,8 +1,10 @@
 import Course from '../models/course';
 import axios from 'axios';
 
-export const getCoursesByDepartment = (req, res) => {
-    
+export const getCoursesByDepartment = async (req, res) => {
+    const { dept } = req.params;
+    const courses = await Course.find({dept});
+    res.json(courses);
 }
 
 export const migrateApiData = async (req, res) => {
@@ -31,13 +33,9 @@ export const migrateApiData = async (req, res) => {
 
 export const getAllCoursesByDepartment = async(req, res) => {
     const{depart} = req.body;
+
     let courses = [];
-    courses = await Course.find({dept: depart})
+    courses = await Course.find({dept: depart});
+
     res.json(courses);
 }
-
-/*
-export const getAllDepartments = async(req, res) => {
-    const allDepartments = await Course.findAll({dept: });
-}
-*/

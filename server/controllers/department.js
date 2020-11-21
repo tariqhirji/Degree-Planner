@@ -3,6 +3,13 @@ import axios from 'axios';
 
 export const getAllDepartments = async (req, res) => {
     const departments = await Department.find({});
+
+    departments.sort(function (a, b) {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+    });
+
     res.json(departments);
 }
 
