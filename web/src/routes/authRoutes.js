@@ -9,17 +9,10 @@ export const forgotPassword = async (data) => {
     return success;
 }
 
-export const signup = async (data) => {
+export const register = async (data) => {
     const response = await axios.post(`${API}/api/user/register`, data, config);
-    //console.log(response);
-    const {user,errors}= response.data;
-    if(user===null) {
-        alert('error') 
-        return null; 
-    }
-    else{
-        return user;
-    }
+    const userResponse = response.data;
+    return userResponse;
 }
 
 export const changePassword = async (data) => {
@@ -28,7 +21,7 @@ export const changePassword = async (data) => {
     return userResponse;
 }
 
-export const loginUser = async (data) => {
+export const login = async (data) => {
     const response = await axios.post(`${API}/api/user/login`, data, config);
     const userResponse = response.data;
     return userResponse;

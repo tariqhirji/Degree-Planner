@@ -1,8 +1,7 @@
 import React from 'react'
 import LandingCarousel from '../components/LandingCarousel'
-import './css/Landing.css'
 import LandingLogo2 from '../img/landing2.svg'
-
+import './css/Landing.css'
 
 export default function Landing() {
     return (

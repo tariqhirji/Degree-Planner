@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
+import { login } from "../routes/authRoutes";
 import "./css/Login.css"
-import {loginUser} from "../routes/authRoutes/"
 
 class Login extends Component{
     constructor(){
         super();
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            errors: []
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.toForgotPassword = this.toForgotPassword.bind(this);
-        this.toHomePage = this.toHomePage.bind(this);
     }
 
     handleChange(e){
@@ -22,29 +22,17 @@ class Login extends Component{
 
     async handleSubmit(e){
         e.preventDefault();
-        const{username, password}= this.state;
-        const data = {
-            username,
-            password
-        };
-        const res = await loginUser(data);
-        const{user, errors} = res;
-        if(user === null){
-            for(let i=0; i < errors.length; i++){
-                if(errors[i].field != null){
-                    alert.error(errors[i].message);
-                    break;
-                }
-            }
+        
+        const { username, password } = this.state;
+        
+        const userResponse = await login({username, password});
+        const{ user } = userResponse;
+
+        if(user){
+            this.props.history.push('/');
         } else{
-        alert.success("success logging in");
-        toHomePage();
+            this.setState({errors: userResponse.errors});
         }
-
-    }
-
-    toHomePage(){
-        this.props.history.push('/');
     }
 
     toForgotPassword(){
@@ -52,7 +40,8 @@ class Login extends Component{
     }
 
     render(){
-        const{username, password} = this.state;
+        const{ username, password, errors } = this.state;
+
         return(
             <div className='login'>
                 <form onSubmit={this.handleSubmit} className="form">
@@ -86,7 +75,13 @@ class Login extends Component{
                         Forgot Password
                     </p>
 
-                    <button className="btn">SUBMIT </button>
+                    <button className="btn">SUBMIT</button>
+
+                    <div style={{color: 'red'}}>
+                        {errors.map(err => <p>
+                            {`${err.field} error: ${err.message}`}
+                        </p>)}
+                    </div>
                 </form>
             </div>
         )

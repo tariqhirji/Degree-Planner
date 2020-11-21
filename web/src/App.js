@@ -7,8 +7,6 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
-import Login from './containers/Login.jsx';
-import Signup from './containers/SignUp.jsx';
 
 function App() {
   return (
@@ -22,7 +20,6 @@ function App() {
              <Route exact path ='/register' component={SignUp}/>
              <Route exact path ='/change_password/:token' component={ChangePassword}/>
              <Route exact path='/forgot_password' component={ForgotPassword}/> 
-             <Route exact path='/signup' component={Signup}/> 
              <Route path='/' component={DeadPage}/>
           </Switch>
        </BrowserRouter>
