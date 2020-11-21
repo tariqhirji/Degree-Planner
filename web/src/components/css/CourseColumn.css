@@ -1,0 +1,7 @@
+.course-col .course{
+    cursor: pointer;
+}
+
+.course-col .course:hover{
+    text-decoration: underline;
+}

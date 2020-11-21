@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { getAllDepartments } from '../routes/departmentRoutes';
 import Sidebar from '../components/Sidebar';
 import Courses from '../components/Courses';
@@ -27,6 +29,11 @@ class DepartmentInfo extends Component{
 
     render(){
         const { departments, departmentName } = this.state;
+        const { signedIn } = this.props;
+
+        if(!signedIn){
+            return <Redirect to = '/'/>
+        }
 
         return(
             <div className='departments'>
@@ -52,4 +59,6 @@ class DepartmentInfo extends Component{
     }
 }
 
-export default DepartmentInfo;
+const mapStateToProps = (state) => ({signedIn: state.signedIn});
+
+export default connect(mapStateToProps)(DepartmentInfo);

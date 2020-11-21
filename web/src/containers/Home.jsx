@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Sidebar from '../components/Sidebar'
-import './css/Home.css'
+import './css/Home.css';
 
 export default function Home() {
     return (
@@ -8,4 +8,4 @@ export default function Home() {
             <Sidebar />
         </div>
     )
-}
+};

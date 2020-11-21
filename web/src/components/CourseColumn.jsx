@@ -7,7 +7,7 @@ function CourseColumn(props){
     return(
         <div className = 'col-3 course-col'>
             {courses.map(c =>
-                <div key={c._id}>
+                <div key={c._id} className='course'>
                     {c.name}
                 </div>    
             )}

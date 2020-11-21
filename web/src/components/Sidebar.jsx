@@ -73,6 +73,12 @@ function ResponsiveDrawer(props) {
       if (text === 'Profile') {
         props.history.push('/profile')
       }
+
+      if(text === 'Departments'){
+        props.history.push('/departments');
+      }
+
+      //Home
       if(text === "Home") {
         props.history.push('/')
       }
@@ -82,7 +88,7 @@ function ResponsiveDrawer(props) {
     <div>
       <div className={classes.toolbar} />
       <List>
-        {['Home', 'Degrees/Programs', 'Courses', 'Profile', 'Logout'].map((text) => (
+        {['Home', 'Departments', 'Courses', 'Profile', 'Logout'].map((text) => (
           <div onClick={() => handleClick(text)}>
             <ListItem button key={text} className="py-3">
                 <ListItemText primary={text} className="SidebarListItem"/>
