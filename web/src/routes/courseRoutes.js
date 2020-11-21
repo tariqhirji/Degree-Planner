@@ -9,6 +9,12 @@ export const getCourseById = async (id) => {
     return course;
 }
 
+export const getCourseByName = async (name) => {
+    const response = await axios.get(`${API}/api/course/name/${name}`);
+    const course = response.data;
+    return course;
+}
+
 export const getCoursesByDepartment = async (dept) => {
     const response = await axios.get(`${API}/api/course/dept/${dept}`);
     const courses = response.data;

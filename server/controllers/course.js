@@ -50,3 +50,9 @@ export const getCourseData = async (req,res) => {
 
     res.json(course);
 }
+
+export const getCourseByName  = async (req, res) => {
+    const { name } = req.params;
+    const course = await Course.findOne({name});
+    res.json(course);
+}

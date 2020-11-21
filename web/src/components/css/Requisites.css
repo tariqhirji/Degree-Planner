@@ -1,0 +1,7 @@
+.reqs span{
+    cursor: pointer;
+}
+
+.reqs span:hover{
+    text-decoration: underline;
+}

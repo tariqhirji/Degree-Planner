@@ -1,51 +1,73 @@
 import React,{Component} from 'react';
-import { getCourseById } from '../routes/courseRoutes';
-import './css/CourseInfo.css'
+import { getCourseById, getCourseByName } from '../routes/courseRoutes';
 import Sidebar from '../components/Sidebar';
 import Requisites from '../components/Requisites';
+import './css/CourseInfo.css'
+
 class CourseInfo extends Component{
     constructor(){
         super();
         this.state={
-            id: "5fb9575028191e40bc76d915",
-            course:{
-                name: '',
-                code: '',
-                cred: '',
-                creq: [],
-                dept: '',
-                desc: '',
-                link: '',
-                preq: []
-            }
+            name: '',
+            cred: '',
+            creq: [],
+            dept: '',
+            desc: '',
+            link: '',
+            preq: []
         };
+
+        this.getCourseData = this.getCourseData.bind(this);
         this.buildRequisites = this.buildRequisites.bind(this);
     }
 
    async  componentDidMount(){
-        const{id} = this.state;
-        const response = await getCourseById(id);
-        this.state.course = response;
-        console.log(this.state.course);
+        const { id } = this.props.match.params;    
+
+        const course = await this.getCourseData(id);
+     
+        this.setState({...course});
     }
 
-    buildRequisites(requisite){
-        let str ="";
-        for(let i=0;i<requisite.length;i++){
-            str+=requisite[i] ;
-            if(i+1!==requisite.length){
-                str+= ", ";
-            }
+    async componentDidUpdate(prevProps){
+        const { id } = this.props.match.params;    
+
+        if(id !== prevProps.match.params.id){
+            const course = await this.getCourseData(id);
+            this.setState({...course});
         }
-        console.log(str);
-        console.log(requisite[0]);
-        return str;
+    }
+
+    async getCourseData(id){
+        const course = await getCourseById(id);
+        const { preq, creq } = course;
+    
+        course.preq = await this.buildRequisites(preq);
+        course.creq = await this.buildRequisites(creq);
+
+        return course;
+    }
+
+    async buildRequisites(requisite){
+        const  result = []
+     
+        for(let i=0;i<requisite.length;i++){
+            const course = await getCourseByName(requisite[i]);
+
+            const obj = {};
+            
+            obj.name = course.name;
+            obj._id = course._id;
+
+            result[i] = JSON.stringify(obj);
+        }
+  
+        return result;
     }
 
     render(){
-        const {name,code,cred,creq,dept,desc,link,preq} =this.state.course;
-        let strPreq = this.buildRequisites(preq);
-        let strCreq = this.buildRequisites(creq);
+        const {name, cred,creq,dept,desc,link,preq} =this.state;
+       
         return(
             <div>
             <Sidebar/>
@@ -59,13 +81,12 @@ class CourseInfo extends Component{
                         <label htmlFor="courseDescription" className="novecentoMedium borderBottom"><strong><u>Course Description:</u></strong></label>
                         <p id="courseDescription">{desc}</p>
                     </div>
-                    {preq.length>0? <Requisites courses={strPreq} type="preq"/>:null}
-                    {creq.length>0? <Requisites courses={strCreq} type="creq"/>:null}
+                    {preq.length>0? <Requisites list={(preq)}  type="preq"/>:null}
+                    {creq.length>0? <Requisites list={(creq)}  type="creq"/>:null}
                     {cred?<p>Credits: {cred}</p> : null}
                     <label htmlFor="courseLink"><strong>For More Info:</strong> </label>
                     <a className="ml-2"  href={link} id="courseLink">{link}</a>
                 </div>
-
             </div>
            </div>
         )
