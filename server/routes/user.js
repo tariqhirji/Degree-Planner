@@ -5,7 +5,9 @@ import {
     getMe,
     login, 
     logout, 
-    register 
+    register,
+    setAcademia,
+    setCredentials 
 } from '../controllers/user';
 
 const router = express.Router();
@@ -16,5 +18,7 @@ router.get('/logout', logout);
 router.post('/forgot_password', forgotPassword);
 router.post('/change_password', changePassword);
 router.get('/me', getMe);
+router.post('/academia', setAcademia);
+router.post('/updateCredentials', setCredentials)
 
 export default router;

@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import './css/ProfileCard.css'
+import {updateCreds, academia} from "../routes/userRoutes";
+
 
 class ProfileCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            email: "",
-            year: 0,
-            degree: "",
-            department: "",
+            username: this.props.user.username,
+            name: this.props.user.fullName,
+            email: this.props.user.email,
+            year: this.props.user.yearOfStudy,
+            degree: this.props.user.degree,
+            department: this.props.user.department,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit1 = this.handleSubmit1.bind(this);
@@ -20,20 +24,42 @@ class ProfileCard extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    handleSubmit1(e){
+    async handleSubmit1(e){
         const {name, email} = this.state
-        e.preventDefault()
-        alert(`new Name: ${name}, new email: ${email}`)
+        e.preventDefault();
+        const data = {
+            name,
+            email
+        }
+        const response = await updateCreds(data);
+        if(response){
+            alert(`new Name: ${name}, new email: ${email}`)
+        }else{
+            alert("Failed to Update Credentials")
+        }
     }
 
-    handleSubmit2(e){
+    async handleSubmit2(e){
         const {year, degree, department} = this.state
-        e.preventDefault()
+        e.preventDefault();
+
+        const data = {
+            year,
+            degree,
+            department
+        };
+        const result = await academia(data);
+        if(result){
         alert(`new year: ${year}, new degree: ${degree}, new department: ${department}`)
+        }else{
+            alert("Failed to update academia infomation")
+        }
     }
 
     render() {
-        const { name, email, year, degree, department } = this.state;
+        const { username, name, email, year, degree, department } = this.state;
+        
+
         return (
             <div className="ProfileCard col-12">
                 <div className="card rounded">
@@ -55,7 +81,8 @@ class ProfileCard extends Component {
                                 <input
                                     className="form-control"
                                     type="text" 
-                                    placeholder="username" 
+                                    placeholder="username"
+                                    value={username} 
                                     disabled
                                 />
                             </div>
@@ -164,5 +191,5 @@ class ProfileCard extends Component {
         )
     }
 }
-
-export default ProfileCard;
+const mapStateToProps = (state) => ({user : state.user});
+export default connect(mapStateToProps)(ProfileCard);
