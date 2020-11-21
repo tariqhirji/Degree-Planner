@@ -1,0 +1,60 @@
+import cors from 'cors';
+import dotenv from 'dotenv';
+import Redis from 'ioredis';
+import connectRedis from 'connect-redis';
+import session from 'express-session';
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser';
+import express from 'express';
+import userRouter from './routes/user';
+
+//env variables/express server set up
+dotenv.config();
+const app = express();
+
+//redis cache set up
+const RedisStore = connectRedis(session);
+export const redis = new Redis();
+
+app.use(
+    session({
+        name: process.env.COOKIE_NAME,
+        store: new RedisStore({
+            client: redis,
+            disableTouch: true 
+        }),
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 365, //1 year
+            httpOnly: true,
+            sameSite: 'lax', //handle csrf
+            secure: false //cookie works in http
+        }
+    })
+);
+
+app.use(cors({credentials: true}));
+app.use(bodyParser.json());
+
+//db set up
+mongoose.connect(process.env.DB, {
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
+
+mongoose.connection.once('open', () => {
+    console.log('connected to the database');
+})
+.on('error', err => {
+    console.log(err);
+});
+
+//routes set up
+app.use('/api/user', userRouter);
+
+app.listen(process.env.PORT || 5000, () => {
+    console.log('Listening to port 5000');
+});
