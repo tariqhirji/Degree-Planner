@@ -6,6 +6,7 @@
     font-family: 'Chakra Petch', sans-serif;
     color: #4f2683;
     position: fixed;
+    overflow: auto;
 }
 
 .dept-container{

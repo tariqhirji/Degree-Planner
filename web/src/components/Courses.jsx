@@ -14,19 +14,25 @@ class CoursesList extends Component{
         this.getCourses = this.getCourses.bind(this);
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         const { department } = this.props;
 
         if(department) {
             await this.getCourses();
+        } else{ 
+            this.setState({courses: [[], [], [], [] ]});
         }
     }
 
-    componentDidUpdate(prevProps){
+    async componentDidUpdate(prevProps){
         const { department } = this.props;
 
         if(department !== prevProps.department && department){
             await this.getCourses();
+        } 
+
+        else if(department !== prevProps.department && !department){
+            this.setState({courses: [[], [], [], [] ]});
         }
     }
 
@@ -42,12 +48,32 @@ class CoursesList extends Component{
         const { courses } = this.state;
 
         return(
-            <div className='courses-list'>
+            <div className='row courses'>
+                {courses.map((_, i) => {
+                    if(i === 0){
+                        return  (<h2 className='col-3'>
+                                    First year
+                                </h2>)
+                    } else if(i === 1){
+                        return (<h2 className='col-3'>
+                                 Second year
+                               </h2>)
+                    } else if(i === 2){
+                        return (<h2 className='col-3'>
+                                 Third year
+                               </h2>)
+                    } else{
+                        return (<h2 className='col-3'>
+                                  Fourth year
+                               </h2>)
+                    }
+                })}
+
                {courses.map(col => 
                     col.length === 0? 
-                    (<h1>
+                    (<p className='col-3'>
                         Courses unavailable
-                    </h1>) :
+                    </p>) :
                     (<CourseColumn 
                         courses = {JSON.stringify(col)}
                     />)

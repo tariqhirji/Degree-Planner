@@ -23,8 +23,8 @@
     color:whitesmoke;
 }
 
-.login .form-group{
-    padding: 30px;
+.login .form-group, .login input{
+    width: 100%;
 }
 
 .login p{

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { getAllDepartments } from '../routes/departmentRoutes';
+import Sidebar from '../components/Sidebar';
+import Courses from '../components/Courses';
 import  './css/DepartmentInfo.css';
 
 class DepartmentInfo extends Component{
@@ -8,7 +10,7 @@ class DepartmentInfo extends Component{
 
         this.state = {
             departments: [],
-            departmentId: null
+            departmentName: null
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,27 +22,31 @@ class DepartmentInfo extends Component{
     }
 
     handleChange(e){
-        this.setState({departmentId: e.target.value});
+        this.setState({departmentName: e.target.value});
     }
 
     render(){
-        const { departments, departmentId } = this.state;
+        const { departments, departmentName } = this.state;
 
         return(
             <div className='departments'>
-                <div className='dept-container text-center container-fluid'>
+                <Sidebar/>
+
+                <div className='dept-container text-center'>
                     <h1 className='mb-3'>Select a Department</h1>
 
-                    <select onChange={this.handleChange} value={departmentId}>
+                    <select onChange={this.handleChange} value={departmentName}>
                         <option value=''></option>
 
                         {departments.map(department =>
-                            <option value={department._id} key={department._id}>
+                            <option value={department.name} key={department.name}>
                                 {department.name}
                             </option>
                         )}
                     </select>
                 </div>
+
+                < Courses  department = {departmentName} />
             </div>
         )
     }
