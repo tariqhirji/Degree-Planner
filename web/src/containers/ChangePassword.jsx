@@ -23,12 +23,8 @@ class ChangePassword extends Component{
         e.preventDefault();
 
         const { token } = this.props.match.params;
-        const { newPassword,confirmPassword } = this.state;
-        if(newPassword!==confirmPassword){
-            //change alert to something else later
-            alert("Passwords do not match!");
-            return;
-        }
+        const { newPassword } = this.state;
+
         const userResponse = await changePassword({token, newPassword});
         const { user} = userResponse;
 
@@ -38,46 +34,26 @@ class ChangePassword extends Component{
     }
 
     render(){
-        const { newPassword,oldPassword,confirmPassword} = this.state;
+        const { newPassword } = this.state;
 
         return(
             <div className="changePasswordContainer">
                 <form className = "changePassword"onSubmit={this.handleSubmit}>
-                <h3>Change Password</h3>
-                <br></br>
-                <div className = "form-group">
-                        <label htmlFor="oldPassword">Old Password</label>
-                        <input
-                            className="form-control"
-                            name = 'oldPassword'
-                            type ='password'
-                            value = {oldPassword}
-                            onChange={this.handleChange}
-                            required
-                        />
-                </div>
-                <div className="form-group">
-                        <label htmlFor="newPassword">New Password</label>
-                        <input
-                            className="form-control"
-                            name = 'newPassword'
-                            type ='password'
-                            value = {newPassword}
-                            onChange={this.handleChange}
-                            required
-                        />
-                </div>
-                <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirm Password</label>
-                        <input
-                            className="form-control"
-                            name = 'confirmPassword'
-                            type ='password'
-                            value = {confirmPassword}
-                            onChange={this.handleChange}
-                            required
-                        />
-                </div>
+                    <h3>Change Password</h3>
+                    <br></br>
+                
+                    <div className="form-group">
+                            <label htmlFor="newPassword">New Password</label>
+                            <input
+                                className="form-control"
+                                name = 'newPassword'
+                                type ='password'
+                                value = {newPassword}
+                                onChange={this.handleChange}
+                                required
+                            />
+                    </div>
+             
 
                     <button className="btn btn-submit">Submit</button>
                 </form>
