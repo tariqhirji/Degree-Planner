@@ -62,7 +62,7 @@ class SignUp extends Component{
 
         return(
             <div className = "signUpContainer">
-                <form className = "SignUp" onSubmit = {this.handleSubmit}>
+                <form className = "SignUp text-center" onSubmit = {this.handleSubmit}>
                     <h3><em>Sign Up</em></h3>
                     <hr/>
                     
