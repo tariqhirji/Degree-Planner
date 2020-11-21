@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setUser } from '../store/userActions';
 import { logout } from '../routes/authRoutes';
+import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -62,12 +63,15 @@ function ResponsiveDrawer(props) {
   };
 
   const handleClick = async (text) => {
+      // Logout
       if(text === 'Logout'){
           const { dispatch } = props;
-
           await logout();
-
           dispatch(setUser(null));
+      }
+      // Profile
+      if (text === 'Profile') {
+        props.history.push('/profile')
       }
   }
 
@@ -78,11 +82,10 @@ function ResponsiveDrawer(props) {
         {['Home', 'Degrees/Programs', 'Courses', 'Profile', 'Logout'].map((text) => (
           <div onClick={() => handleClick(text)}>
             <ListItem button key={text} className="py-3">
-                <ListItemText primary={text}/>
+                <ListItemText primary={text} className="SidebarListItem"/>
             </ListItem>
             <Divider/>
-          </div>
-          
+          </div>   
         ))}
       </List>
     </div>
@@ -151,4 +154,4 @@ ResponsiveDrawer.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({dispatch});
 
-export default connect(null, mapDispatchToProps)(ResponsiveDrawer);
+export default withRouter(connect(null, mapDispatchToProps)(ResponsiveDrawer));

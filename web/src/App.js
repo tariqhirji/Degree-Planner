@@ -34,6 +34,7 @@ class App extends Component{
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
+                  <Route exact path='/profile' component={ForgotPassword}/> 
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>
