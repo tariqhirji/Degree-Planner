@@ -10,7 +10,7 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
-import Home from './containers/Home'
+import Home from './containers/Home';
 
 class App extends Component{
    async componentDidMount(){
@@ -27,9 +27,9 @@ class App extends Component{
       return (
          <div className="App">
             <BrowserRouter>
-            {!signedIn?<Navbar/>:null}
+               {!signedIn? <Navbar/> : null}
                <Switch>
-                  <Route exact path='/' render={() => (signedIn) ?  <Home/> : <Landing/> }/>
+                  <Route exact path='/' render={() => (signedIn)? <Home/> : <Landing/> }/>
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>

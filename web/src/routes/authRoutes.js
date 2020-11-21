@@ -33,3 +33,9 @@ export const getMe = async () => {
     const user = response.data;
     return user;
 }
+
+export const logout = async () => {
+    const response = await axios.get(`${API}/api/user/logout`);
+    const { message } = response.data;
+    return message;
+}

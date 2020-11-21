@@ -22,19 +22,25 @@ class ForgotPassword extends Component{
     async handleSubmit(e){
         e.preventDefault();
         const { email } = this.state;
+        
         await forgotPassword({email});
+        
         this.setState({submitted: true});
     }
 
     render(){
         const { email, submitted } = this.state;
 
+        const header =  (<h2>
+                         Email has been sent to the corresponding email account
+                       </h2>)  
+
         return(
             <div className="container-fluid ForgotPassword p-0">
                 <div className="row align-content-center text-center h-100 w-100 no-gutters">
                     <div className="col-12 justify-content-center">
                         <div className="card ForgotPasswordCard mx-auto rounded border border-dark align-items-center">
-                            <div className="card-body mt-3">
+                            { !submitted? <div className="card-body mt-3">
                                 <h2 className="card-title my-5">Forgot your password?</h2>
                                 <h5 className="card-text my-5">Enter your registered email below and we will<br/> send you a link to reset your password</h5>
                                 <form onSubmit={this.handleSubmit}>
@@ -53,10 +59,11 @@ class ForgotPassword extends Component{
                                             Submit
                                         </button>
                                     </div>
-                                </form>
-                            </div>
+                                </form> 
+                            </div> : <div className ='card-body mt-3'>{header}</div>}
                         </div>
                     </div>
+                </div>
             </div>
             </div>
         )

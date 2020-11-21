@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setUser } from '../store/userActions';
+import { logout } from '../routes/authRoutes';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -58,12 +61,22 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleClick = async (text) => {
+      if(text === 'Logout'){
+          const { dispatch } = props;
+
+          await logout();
+
+          dispatch(setUser(null));
+      }
+  }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <List>
         {['Home', 'Degrees/Programs', 'Courses', 'Profile', 'Logout'].map((text) => (
-          <div>
+          <div onClick={() => handleClick(text)}>
             <ListItem button key={text} className="py-3">
                 <ListItemText primary={text}/>
             </ListItem>
@@ -136,4 +149,6 @@ ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+const mapDispatchToProps = (dispatch) => ({dispatch});
+
+export default connect(null, mapDispatchToProps)(ResponsiveDrawer);
