@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { forgotPassword } from '../routes/authRoutes';
-
+import './css/ForgotPassword.css';
 class ForgotPassword extends Component{
     constructor(){
         super();
@@ -31,25 +31,38 @@ class ForgotPassword extends Component{
         const { email, submitted } = this.state;
 
         return(
-            <div>
-                {submitted?
+            <div className="forgotPassword">
+                <div>
+                    <div>
+                    {submitted?
                     (<h1>
                         If email is registered it has been sent
                     </h1>) :
-                    (<form onSubmit={this.handleSubmit}>
+                    (
+                    <form className="emailForm" onSubmit={this.handleSubmit}>
+                        <h3>Forgot Password ?</h3>
+                        <div className = "form-group">
                         <input
                             name = 'email'
                             type='text'
                             value={email}
                             onChange={this.handleChange}
+                            placeholder = "Email"
                             required
                         />
+
+                        </div>
+
       
-                        <button>
-                            Submit
+                        <button className="btn btn-submit">
+                            Reset Password
                         </button>
                     </form>)
                 }
+                    </div>
+                
+                </div>
+                
             </div>
         )
     }
