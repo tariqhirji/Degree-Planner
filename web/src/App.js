@@ -11,6 +11,7 @@ import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
 import Home from './containers/Home';
+import CourseInfo from './containers/CourseInfo';
 
 class App extends Component{
    async componentDidMount(){
@@ -34,6 +35,7 @@ class App extends Component{
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
+                  <Route exact path='/course/:id' component={CourseInfo}/>
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>
