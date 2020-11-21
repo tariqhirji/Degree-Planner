@@ -6,7 +6,7 @@ import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
 import Login from './containers/Login.jsx';
-import Signup from './containers/SignUp/SignUp.jsx';
+import Signup from './containers/SignUp.jsx';
 
 function App() {
   return (

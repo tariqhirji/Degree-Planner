@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import { signup } from '../../routes/authRoutes';
-import './SignUp.css';
+import { signup } from '../routes/authRoutes';
+import './css/SignUp.css';
 class SignUp extends Component{
     constructor(){
         super();
