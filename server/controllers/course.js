@@ -1,6 +1,10 @@
 import Course from '../models/course';
 import axios from 'axios';
 
+export const getCoursesByDepartment = (req, res) => {
+    
+}
+
 export const migrateApiData = async (req, res) => {
     const response = await axios.get('https://ubcexplorer.io/getAllCourses');
     const data = response.data;

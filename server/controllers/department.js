@@ -1,6 +1,11 @@
 import Department from '../models/department';
 import axios from 'axios';
 
+export const getAllDepartments = async (req, res) => {
+    const departments = await Department.find({});
+    res.json(departments);
+}
+
 export const generateDepartments = async (req, res) => {
     const map = {};
 
