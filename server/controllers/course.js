@@ -24,3 +24,16 @@ export const migrateApiData = async (req, res) => {
 
     res.json({msg: 'Finished'});
 }
+
+export const getAllCoursesByDepartment = async(req, res) => {
+    const{depart} = req.body;
+    let courses = [];
+    courses = await Course.find({dept: depart})
+    res.json(courses);
+}
+
+/*
+export const getAllDepartments = async(req, res) => {
+    const allDepartments = await Course.findAll({dept: });
+}
+*/
