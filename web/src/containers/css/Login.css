@@ -7,16 +7,17 @@
     width: 100%;
     display: flex;
     align-items: center;
+    position: fixed;
 }
 
-.btn{
+.login .btn{
     outline: #ffff;
     background-color: #117d2e;
     width: 100px;
 }
 
 
-.form{
+.login .form{
     margin: auto;
     text-align: center;
     width: 500px;
@@ -27,6 +28,6 @@
     color:whitesmoke;
 }
 
-.form-group{
+.login .form-group{
     padding: 30px;
 }
