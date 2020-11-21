@@ -15,7 +15,7 @@ export const changePassword = async (data) => {
     return userResponse;
 }
 
-export const login = async (data) => {
+export const loginUser = async (data) => {
     const response = await axios.post(`${API}/api/user/login`, data, config);
     const userResponse = response.data;
     return userResponse;
