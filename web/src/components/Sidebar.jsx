@@ -62,7 +62,7 @@ function ResponsiveDrawer(props) {
     <div>
       <div className={classes.toolbar} />
       <List>
-        {['Home', 'Degrees/Programs', 'Courses', 'Profile'].map((text) => (
+        {['Home', 'Degrees/Programs', 'Courses', 'Profile', 'Logout'].map((text) => (
           <div>
             <ListItem button key={text} className="py-3">
                 <ListItemText primary={text}/>
