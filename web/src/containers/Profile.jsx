@@ -9,8 +9,8 @@ class Profile extends Component {
             <div className="Profile">
                 <Sidebar />
                 <div className="ProfileContent" style={{width: 'calc(100% - 240px)'}}>
-                    <div className="container h-100">
-                        <div className="row justify-content-center align-items-center text-center h-100 w-100">
+                    <div className="container h-100 w-100">
+                        <div className="row justify-content-center align-items-center h-100 w-100">
                             <div className="col-12">
                                 <ProfileCard />
                             </div>

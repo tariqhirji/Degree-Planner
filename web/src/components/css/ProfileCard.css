@@ -1,6 +1,14 @@
-.userIMG {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 50%;
+.ProfileCard {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.profileBtn {
+    background-color: #4f2683;
+    color: white;
+}
+
+.profileBtn:hover {
+    background-color: #4f2683;
+    color: white;
+    opacity: 0.8;
 }
