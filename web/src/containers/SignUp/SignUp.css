@@ -1,4 +1,4 @@
-h3{
+.signUpContainer h3{
     text-align: center;
     color:whitesmoke;
 }
@@ -8,7 +8,7 @@ h3{
     display: flex;
     align-items: center;
 }
-.SignUp{
+.signUpContainer .SignUp{
     margin: auto;
     text-align: center;
     width: 500px;
@@ -18,15 +18,15 @@ h3{
     border-radius: 10px;
     color:whitesmoke;
 }
-.form-group{
+.signUpContainer .form-group{
     width: 100%;
 }
 
-.btn-success{
+.signUpContainer .btn-success{
     width: 100%;
 }
 
-label{
+.signUpContainer label{
     float: left;
 }
 
