@@ -6,7 +6,6 @@ class UserAcademicForm extends Component{
     constructor(){
         super();
         this.state = {
-            university: '',
             year: Number,
             degree: '',
             dept: '',
@@ -23,9 +22,8 @@ class UserAcademicForm extends Component{
 
     async handleSubmit(e){
         e.preventDefault();
-        const{university, year, degree, dept, coursesTaken}= this.state;
+        const{ year, degree, dept, coursesTaken}= this.state;
         const data = {
-            university: university,
             yearOfStudy: year,
             degree: degree,
             department: dept,
@@ -44,20 +42,12 @@ class UserAcademicForm extends Component{
     }
 
     render(){
-        const{university, year, degree, dept, coursesTaken} = this.state;
+        const{ year, degree, dept, coursesTaken} = this.state;
         return(
             <div className='academics'>
                 <form onSubmit={this.handleSubmit} className='academics-form'>
                     <h2>Your Academics </h2>
-                    <label className='university'>University </label>
-                    <input
-                        type='text'
-                        name='university'
-                        value={university}
-                        onChange={this.handleChange}
-                        required
-                        className='input'
-                    />
+                   
 
                     <label className='year'>Year of Study </label>
                     <input

@@ -197,20 +197,47 @@ export const getMe = async (req, res) => {
 }
 
 export const setAcademia = async(req, res) => {
-    const{university, year, degree, dept, coursesTaken} = req.body;
-    if(req.session.uid){        
-        const user = await User.updateOne  (
-                                                {_id: req.session.uid},
-                                                {university: university,
-                                                yearOfStudy: year,
-                                                degree: degree,
-                                                department: dept,
-                                                coursesTaken: coursesTaken}
-                                                );
+    const{ year, degree, department} = req.body;
+    let user;
+    
+    if(req.session.uid){   
+        if(year && year !== 0){
+            user = await User.updateOne({_id:req.session.uid},
+                                    {yearOfStudy: year});
+        }
+        if(degree){
+            user = await User.updateOne({_id:req.session.uid},
+                                    {degree: degree});
+        }
+        if(department){
+            user = await User.updateOne({_id:req.session.uid},
+                                {department});
+        }     
+
         if(user != null){
             res.json({success: true});
         } else{
             res.json({success: false});
         }
+    }
+}
+
+export const setCredentials = async(req, res) => {
+    const{email, name} = req.body;
+    let user;
+    if(req.session.uid){
+        if(email){
+            user = await User.updateOne( {_id: req.session.uid},
+                                        {email: email});
+        }
+        if(name){
+            user = await User.updateOne( {_id: req.session.uid},
+                                            {fullName: name});
+        }
+        if(user != null){
+            res.json({success:true})
+        } else{
+            res.json({success: false})
+        }                                   
     }
 }
