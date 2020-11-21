@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import userRouter from './routes/user';
 import courseRouter from './routes/course';
+import departmentRouter from './routes/department';
 
 //env variables/express server set up
 dotenv.config();
@@ -54,6 +55,7 @@ mongoose.connection.once('open', () => {
 //routes set up
 app.use('/api/user', userRouter);
 app.use('/api/course', courseRouter);
+app.use('/api/department', departmentRouter);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('Listening to port 5000');

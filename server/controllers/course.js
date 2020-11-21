@@ -1,6 +1,25 @@
 import Course from '../models/course';
 import axios from 'axios';
 
+export const getCoursesByDepartment = async (req, res) => {
+    const { dept } = req.params;
+    const result = [ [], [], [], []];
+
+    const courses = await Course.find({dept});
+
+    courses.forEach(c => {
+        for(let i=0;i<c.code.length;i++){
+            if(c.code[i] >= '0' && c.code[i] <= '9'){
+                const idx = Number(c.code[i] - 1);
+                result[idx].push(c);
+                break;
+            }
+        }
+    });
+
+    res.json(result);
+}
+
 export const migrateApiData = async (req, res) => {
     const response = await axios.get('https://ubcexplorer.io/getAllCourses');
     const data = response.data;
@@ -27,13 +46,9 @@ export const migrateApiData = async (req, res) => {
 
 export const getAllCoursesByDepartment = async(req, res) => {
     const{depart} = req.body;
+
     let courses = [];
-    courses = await Course.find({dept: depart})
+    courses = await Course.find({dept: depart});
+
     res.json(courses);
 }
-
-/*
-export const getAllDepartments = async(req, res) => {
-    const allDepartments = await Course.findAll({dept: });
-}
-*/
