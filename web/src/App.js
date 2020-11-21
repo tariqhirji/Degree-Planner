@@ -13,6 +13,7 @@ import DeadPage from './containers/DeadPage';
 import UserAcademicForm from './components/UserAcademicForm.jsx';
 import Home from './containers/Home'
 
+
 class App extends Component{
    async componentDidMount(){
       const { dispatch } = this.props;
@@ -25,19 +26,16 @@ class App extends Component{
    render(){
       const { signedIn } = this.props;
 
-      const Home = (signedIn) ?  <Home/> : <Landing/> 
-
       return (
          <div className="App">
             <BrowserRouter>
-               <Navbar/>
-               <Switch>
-                  <Route exact path='/' render={() => Home}/>
-                  <Route exact path='/user_settings' component={UserAcademicForm}/>
+               {!signedIn? <Navbar/> : null}
+                  <Route exact path='/' render={() => (signedIn)? <Home/> : <Landing/> }/>
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
+                  <Route exact path='/user_settings' component={UserAcademicForm}/>
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>
