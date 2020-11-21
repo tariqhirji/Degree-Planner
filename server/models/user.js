@@ -6,13 +6,31 @@ const UserSchema = new mongoose.Schema(
             type: String,
             trim: true
         },
+        fullName:{
+            type: String,
+            trim: true
+        },
         email: {
             type: String,
             trim: true
         },
         password: {
             type: String
+        },
+
+        degree:{
+            type: String
+        },
+        coursesTaken:{
+            type: []
+        },
+        yearOfStudy:{
+            type: Number
+        },
+        department:{
+            type: ''
         }
+
     },
     {timestamps: true}
 );

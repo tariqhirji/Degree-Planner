@@ -56,11 +56,11 @@ class Login extends Component{
 
         return(
             <div className='login'>
-                <form onSubmit={this.handleSubmit} className="form">
+                <form onSubmit={this.handleSubmit} className="text-center">
                     <h1 className='login-Title'>Login</h1>
 
-                    <div className="form-group">
-                        <label htmlFor='username'>Username </label>
+                    <div className="form-group text-left">
+                        <label htmlFor='username'>Username</label>
                         <input
                             type="text"
                             name = 'username'
@@ -71,7 +71,7 @@ class Login extends Component{
                         />
                     </div>
 
-                    <div className='form-group'>
+                    <div className='form-group text-left'>
                         <label htmlFor='password'>Password </label>
                         <input
                             type='password'
@@ -83,16 +83,16 @@ class Login extends Component{
                         />
                     </div>
 
-                    <p onClick={this.toForgotPassword}>
+                    <p onClick={this.toForgotPassword} className='mb-4'>
                         Forgot Password
                     </p>
 
-                    <button className="btn">SUBMIT</button>
+                    <button className="btn btn-success">SUBMIT</button>
 
-                    <div style={{color: 'red'}}>
-                        {errors.map(err => <p>
+                    <div style={{color: 'red'}} className='mt-4'>
+                        {errors.map(err => <div className='mt-3'>
                             {`${err.field} error: ${err.message}`}
-                        </p>)}
+                        </div>)}
                     </div>
                 </form>
             </div>

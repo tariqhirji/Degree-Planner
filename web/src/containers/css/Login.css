@@ -5,21 +5,16 @@
 .login{
     height: 100vh;
     width: 100%;
+    background: lightgray;
     display: flex;
     align-items: center;
+    font-family: 'Chakra Petch', sans-serif;
     position: fixed;
 }
 
-.login .btn{
-    outline: #ffff;
-    background-color: #117d2e;
-    width: 100px;
-}
-
-
-.login .form{
-    margin: auto;
-    text-align: center;
+.login form{
+    margin: 0px auto;
+    margin-bottom: 100px;
     width: 500px;
     padding: 20px;
     background-color: #4f2683;
@@ -28,6 +23,24 @@
     color:whitesmoke;
 }
 
-.login .form-group{
-    padding: 30px;
+.login .form-group, .login input{
+    width: 100%;
+}
+
+.login p{
+    text-align: right;
+    cursor: pointer;
+}
+
+.login p:hover{
+    text-decoration: underline;
+}
+
+.login button{
+    width: 100%;
+}
+
+.login button:hover{
+    box-shadow: none;
+    outline: none;
 }

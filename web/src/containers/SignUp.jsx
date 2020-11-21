@@ -62,8 +62,8 @@ class SignUp extends Component{
 
         return(
             <div className = "signUpContainer">
-                <form className = "SignUp" onSubmit = {this.handleSubmit}>
-                    <h3><em>Sign Up</em></h3>
+                <form className = "SignUp text-center" onSubmit = {this.handleSubmit}>
+                    <h1>Sign Up</h1>
                     <hr/>
                     
                     <div className = "form-group">
@@ -117,13 +117,13 @@ class SignUp extends Component{
                     <br></br>
 
                     <button type="submit" className="btn btn-success">
-                        Sign Up
+                        SIGN UP
                     </button>
 
-                    <div style={{color: 'red'}}>
-                        {errors.map(err => <p>
+                    <div style={{color: 'red'}} className='mt-4'>
+                        {errors.map(err => <div className='mt-3'>
                             {`${err.field} error: ${err.message}`}
-                        </p>)}
+                        </div>)}
                     </div>
                 </form>
             </div>

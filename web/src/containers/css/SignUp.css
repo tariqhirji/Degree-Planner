@@ -1,12 +1,9 @@
-.signUpContainer h3{
-    text-align: center;
-    color:whitesmoke;
-}
-
 .signUpContainer{
     height: 100vh;
     width: 100%;
     display: flex;
+    font-family: 'Chakra Petch', sans-serif;
+    background: lightgray;
     align-items: center;
 }
 
@@ -16,8 +13,8 @@
 }
 
 .signUpContainer .SignUp{
-    margin: auto;
-    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 60px;
     width: 500px;
     padding: 20px;
     background-color: #4f2683;
