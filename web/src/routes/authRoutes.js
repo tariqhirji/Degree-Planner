@@ -12,6 +12,11 @@ export const forgotPassword = async (data) => {
 export const changePassword = async (data) => {
     const response = await axios.post(`${API}/api/user/change_password`, data, config);
     const userResponse = response.data;
-    console.log(userResponse)
+    return userResponse;
+}
+
+export const login = async (data) => {
+    const response = await axios.post(`${API}/api/user/login`, data, config);
+    const userResponse = response.data;
     return userResponse;
 }
