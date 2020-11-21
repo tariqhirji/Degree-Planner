@@ -30,6 +30,7 @@ class App extends Component{
          <div className="App">
             <BrowserRouter>
                {!signedIn? <Navbar/> : null}
+               <Switch>
                   <Route exact path='/' render={() => (signedIn)? <Home/> : <Landing/> }/>
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>

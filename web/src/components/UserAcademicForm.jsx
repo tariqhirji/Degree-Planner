@@ -25,7 +25,7 @@ class UserAcademicForm extends Component{
     }
 
     toChangePassword(){
-        this.props.history.push('/change_password')
+        this.props.history.push('/change_password/:token')
     }
 
     render(){
@@ -78,7 +78,7 @@ class UserAcademicForm extends Component{
                         type='text'
                         name='coursesTaken'
                         value={coursesTaken}
-                        onChange={this.onChange}
+                        onChange={this.handleChange}
                         className='input'
                         />
 
