@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { getAllDepartments } from '../routes/departmentRoutes';
+import  './css/DepartmentInfo.css';
 
 class DepartmentInfo extends Component{
     constructor(){
@@ -26,16 +27,20 @@ class DepartmentInfo extends Component{
         const { departments, departmentId } = this.state;
 
         return(
-            <div>
-                <select onChange={this.handleChange} value={departmentId}>
-                    <option value=''></option>
+            <div className='departments'>
+                <div className='dept-container text-center container-fluid'>
+                    <h1>Select a Department</h1>
 
-                    {departments.map(department =>
-                        <option value={department._id} key={department._id}>
-                            {department.name}
-                        </option>
-                    )}
-                </select>
+                    <select onChange={this.handleChange} value={departmentId}>
+                        <option value=''></option>
+
+                        {departments.map(department =>
+                            <option value={department._id} key={department._id}>
+                                {department.name}
+                            </option>
+                        )}
+                    </select>
+                </div>
             </div>
         )
     }
