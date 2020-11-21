@@ -1,5 +1,8 @@
 import User from '../models/user';
+import { sendEmail } from '../utils/sendEmail';
 import bcrypt from 'bcrypt';
+import { redis } from '../app';
+import { v4 } from 'uuid';
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
@@ -114,5 +117,68 @@ export const logout = async (req, res) => {
 }
 
 export const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if(!user){
+        res.json({success: true});
+    }
+
+    else{
+        const token = v4();
+        const href = `<a href='${process.env.CLIENT}/change_password>Reset Password</a>`;
+
+        await redis.set(
+            'forgot-password' + token, //key
+             user._id, //session
+            'ex', //expires
+            1000 * 60 * 60 * 24 *3
+        ); //token expires in 3 days
+
+        await sendEmail(email ,href);
+
+        res.json({success: true});
+    }
+}
+
+export const changePassword = async (req, res) => {
+    const { token, newPassword } = req.body;
     
+    let user = null;
+    let errors = [];
+
+    const key = 'forgot-password:' + token;
+    const uid = await redis.get(key);
+
+    if(!uid){
+        errors.push({
+            field: 'Token',
+            message: 'Token expired'
+        });
+    }
+
+    //token has not expired
+    else{
+        user = await User.findOne({ _id: uid });
+        
+        //user no longer exists
+        if(!user){
+            errors.push({
+                field: 'token',
+                message: 'User no longer exists'
+            });
+        }
+
+        else{
+            const salt = await bcrypt.genSalt();
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+            await User.updateOne({ _id: uid }, { password: hashedPassword});
+
+            req.session.uid = user._id;
+        }
+    }
+
+    res.json({ user, errors });
 }
