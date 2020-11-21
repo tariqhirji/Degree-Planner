@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { forgotPassword } from '../routes/authRoutes';
 import './css/ForgotPassword.css';
+
 class ForgotPassword extends Component{
     constructor(){
         super();
@@ -21,9 +22,7 @@ class ForgotPassword extends Component{
     async handleSubmit(e){
         e.preventDefault();
         const { email } = this.state;
-     
         await forgotPassword({email});
-
         this.setState({submitted: true});
     }
 
@@ -31,38 +30,33 @@ class ForgotPassword extends Component{
         const { email, submitted } = this.state;
 
         return(
-            <div className="forgotPassword">
-                <div>
-                    <div>
-                    {submitted?
-                    (<h1>
-                        If email is registered it has been sent
-                    </h1>) :
-                    (
-                    <form className="emailForm" onSubmit={this.handleSubmit}>
-                        <h3>Forgot Password ?</h3>
-                        <div className = "form-group">
-                        <input
-                            name = 'email'
-                            type='text'
-                            value={email}
-                            onChange={this.handleChange}
-                            placeholder = "Email"
-                            required
-                        />
-
+            <div className="container-fluid ForgotPassword p-0">
+                <div className="row align-content-center text-center h-100 w-100 no-gutters">
+                    <div className="col-12 justify-content-center">
+                        <div className="card ForgotPasswordCard mx-auto rounded border border-dark align-items-center">
+                            <div className="card-body mt-3">
+                                <h2 className="card-title my-5">Forgot your password?</h2>
+                                <h5 className="card-text my-5">Enter your registered email below and we will<br/> send you a link to reset your password</h5>
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="form-group">
+                                        <input
+                                            name="email"
+                                            type="email"
+                                            value={email}
+                                            onChange={this.handleChange}
+                                            required
+                                            placeholder="Email"
+                                            className="my-4 form-control"
+                                        />
+                                        <br/>
+                                        <button className="btn submitBtn" type="button">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-
-      
-                        <button className="btn btn-submit">
-                            Reset Password
-                        </button>
-                    </form>)
-                }
                     </div>
-                
-                </div>
-                
             </div>
         )
     }

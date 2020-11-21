@@ -7,10 +7,13 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser';
 import express from 'express';
 import userRouter from './routes/user';
+import courseRouter from './routes/course';
 
 //env variables/express server set up
 dotenv.config();
 const app = express();
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
+app.use(bodyParser.json());
 
 //redis cache set up
 const RedisStore = connectRedis(session);
@@ -20,8 +23,7 @@ app.use(
     session({
         name: process.env.COOKIE_NAME,
         store: new RedisStore({
-            client: redis,
-            disableTouch: true 
+            client: redis
         }),
         secret: process.env.SESSION_SECRET,
         resave: false,
@@ -34,9 +36,6 @@ app.use(
         }
     })
 );
-
-app.use(cors({origin: 'http://localhost:3000', credentials: true}));
-app.use(bodyParser.json());
 
 //db set up
 mongoose.connect(process.env.DB, {
@@ -54,6 +53,7 @@ mongoose.connection.once('open', () => {
 
 //routes set up
 app.use('/api/user', userRouter);
+app.use('/api/course', courseRouter);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('Listening to port 5000');

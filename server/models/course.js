@@ -1,17 +1,17 @@
 import mongoose from 'mongoose';
-const schema = mongoose.Schema;
-const courseSchema = new schema({
+
+const CourseSchema = new mongoose.Schema({
+    preq: [String],
+    creq: [String],
+    dept: String,
+    code: String,
     name: String,
-    number: Number,
-    subjectCode: String,
-    preReq: [Course],
-    antiReq: [Course],
-    weight: Number,
-    category: String
-
-
+    cred: Number,
+    desc: String,
+    link: String,
+    prer: String,
+    crer: String
 });
 
-const Course = mongoose.model('course',coursesSchema);
-
+const Course = mongoose.model('course', CourseSchema);
 export default Course;
