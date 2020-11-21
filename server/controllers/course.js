@@ -3,8 +3,21 @@ import axios from 'axios';
 
 export const getCoursesByDepartment = async (req, res) => {
     const { dept } = req.params;
+    const result = [ [], [], [], []];
+
     const courses = await Course.find({dept});
-    res.json(courses);
+
+    courses.forEach(c => {
+        for(let i=0;i<c.code.length;i++){
+            if(c.code[i] >= '0' && c.code[i] <= '9'){
+                const idx = Number(c.code[i] - 1);
+                result[idx].push(c);
+                break;
+            }
+        }
+    });
+
+    res.json(result);
 }
 
 export const migrateApiData = async (req, res) => {

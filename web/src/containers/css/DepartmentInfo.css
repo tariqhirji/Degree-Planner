@@ -9,6 +9,19 @@
 }
 
 .dept-container{
+    max-width: 500px;
+    border: solid black 3px;
     margin: 30px auto;
-    padding: 15px;
+    padding: 20px;
+}
+
+.dept-container select{
+    width: 400px;
+    padding: 3px;
+}
+
+@media screen and (max-width: 650px){
+    .dept-container select{
+        width: 200px;
+    }
 }

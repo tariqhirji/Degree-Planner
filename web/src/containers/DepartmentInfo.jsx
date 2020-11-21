@@ -29,7 +29,7 @@ class DepartmentInfo extends Component{
         return(
             <div className='departments'>
                 <div className='dept-container text-center container-fluid'>
-                    <h1>Select a Department</h1>
+                    <h1 className='mb-3'>Select a Department</h1>
 
                     <select onChange={this.handleChange} value={departmentId}>
                         <option value=''></option>
