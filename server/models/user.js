@@ -12,7 +12,25 @@ const UserSchema = new mongoose.Schema(
         },
         password: {
             type: String
+        },
+
+        university: {
+            type: String,
+        },
+
+        degree:{
+            type: String
+        },
+        coursesTaken:{
+            type: []
+        },
+        yearOfStudy:{
+            type: Number
+        },
+        department:{
+            type: []
         }
+
     },
     {timestamps: true}
 );
