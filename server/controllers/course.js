@@ -44,11 +44,9 @@ export const migrateApiData = async (req, res) => {
     res.json({msg: 'Finished'});
 }
 
-export const getAllCoursesByDepartment = async(req, res) => {
-    const{depart} = req.body;
+export const getCourseData = async (req,res) => {
+    const {id} = req.params;
+    const course = await Course.findOne({_id:id});
 
-    let courses = [];
-    courses = await Course.find({dept: depart});
-
-    res.json(courses);
+    res.json(course);
 }

@@ -1,0 +1,19 @@
+
+
+.courseInfoContainer {
+    background-color: lightgray;
+    height: 100vh;
+    width: calc(100% - 240px);
+    margin-left: 240px ;
+    position: fixed;
+}
+
+.courseInfoContainer .courseInfo{
+    
+}
+.courseInfoContainer .deptLabel{
+    font-size: 30px;
+}
+#deptLink{
+    font-size: 25px;
+}

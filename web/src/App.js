@@ -10,8 +10,8 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
+import CourseInfo from './containers/CourseInfo';
 import Profile from './containers/Profile'
-import UserAcademicForm from './components/UserAcademicForm.jsx';
 import Home from './containers/Home'
 import DepartmentInfo from './containers/DepartmentInfo';
 
@@ -39,7 +39,7 @@ class App extends Component{
                   <Route exact path ='/departments' component={DepartmentInfo}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
-                  <Route exact path='/user_settings' component={UserAcademicForm}/>
+                  <Route exact path='/course/:id' component={CourseInfo}/>
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>
