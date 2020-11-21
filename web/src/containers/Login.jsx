@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setUser } from '../store/userActions';
 import { login } from "../routes/authRoutes";
 import "./css/Login.css"
 
@@ -24,12 +27,16 @@ class Login extends Component{
         e.preventDefault();
         
         const { username, password } = this.state;
-        
+   
         const userResponse = await login({username, password});
         const{ user } = userResponse;
 
         if(user){
-            this.props.history.push('/');
+            const { dispatch, history } = this.props;
+
+            dispatch(setUser(user));
+            
+            history.push('/');
         } else{
             this.setState({errors: userResponse.errors});
         }
@@ -41,11 +48,16 @@ class Login extends Component{
 
     render(){
         const{ username, password, errors } = this.state;
+        const { signedIn } = this.props;
+
+        if(signedIn){
+            return <Redirect to = '/'/>
+        }
 
         return(
             <div className='login'>
                 <form onSubmit={this.handleSubmit} className="form">
-                    <h1 className='login-Title'>LogIn</h1>
+                    <h1 className='login-Title'>Login</h1>
 
                     <div className="form-group">
                         <label htmlFor='username'>Username </label>
@@ -62,7 +74,7 @@ class Login extends Component{
                     <div className='form-group'>
                         <label htmlFor='password'>Password </label>
                         <input
-                            type="text"
+                            type='password'
                             name='password'
                             onChange={this.handleChange}
                             value={password}
@@ -88,4 +100,7 @@ class Login extends Component{
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({signedIn : state.signedIn});
+const mapDispatchToProps = (dispatch) => ({dispatch});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

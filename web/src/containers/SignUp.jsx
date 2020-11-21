@@ -1,4 +1,7 @@
 import React,{Component} from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setUser } from '../store/userActions';
 import { register } from '../routes/authRoutes';
 import './css/SignUp.css';
 
@@ -23,9 +26,9 @@ class SignUp extends Component{
     }
     async handleSubmit(e){
         e.preventDefault();
-        const{ username, email, password, confirmpassword} = this.state;
+        const{ username, email, password, confirmPassword} = this.state;
         
-        if(password!==confirmpassword) {
+        if(password !== confirmPassword) {
             this.setState({errors: [{
                     field: 'Password',
                     message: 'Passwords do not match'
@@ -39,7 +42,11 @@ class SignUp extends Component{
         const { user } = userResponse;
 
         if(user){
-            this.props.history.push('/');
+            const { dispatch, history } = this.props;
+
+            dispatch(setUser(user));
+
+            history.push('/');
         } else{
             this.setState({errors: userResponse.errors});
         }
@@ -47,12 +54,16 @@ class SignUp extends Component{
 
     render(){
         const { username, password, confirmPassword, email, errors} = this.state;
+        const { signedIn } = this.props;
+
+        if(signedIn){
+            return <Redirect to = '/'/>
+        }
 
         return(
             <div className = "signUpContainer">
                 <form className = "SignUp" onSubmit = {this.handleSubmit}>
                     <h3><em>Sign Up</em></h3>
-
                     <hr/>
                     
                     <div className = "form-group">
@@ -119,4 +130,8 @@ class SignUp extends Component{
         )
     }
 }
-export default SignUp;
+
+const mapStateToProps = (state) => ({signedIn : state.signedIn});
+const mapDispatchToProps = (dispatch) => ({dispatch});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

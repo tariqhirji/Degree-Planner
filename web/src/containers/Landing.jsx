@@ -1,9 +1,10 @@
-import React from 'react'
-import LandingCarousel from '../components/LandingCarousel'
-import LandingLogo2 from '../img/landing2.svg'
-import './css/Landing.css'
+import React from 'react';
+import { withRouter } from 'react-router-dom'; 
+import LandingCarousel from '../components/LandingCarousel';
+import LandingLogo2 from '../img/landing2.svg';
+import './css/Landing.css';
 
-export default function Landing() {
+export default withRouter(function Landing() {
     return (
         <div className="container-fluid Landing p-0">
             <div className="row LandingRow justify-content-center align-content-center text-center no-gutters">
@@ -18,9 +19,7 @@ export default function Landing() {
                         <h4>Discover all of your possible degree paths, <br/>Sign up for free today! </h4>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )
-}
+});

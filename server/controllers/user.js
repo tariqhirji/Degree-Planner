@@ -182,3 +182,16 @@ export const changePassword = async (req, res) => {
 
     res.json({ user, errors });
 }
+
+export const getMe = async (req, res) => {
+    if(req.session.uid){
+        const user = await User.findOne({ _id: req.session.uid });
+        user.password = '';
+
+        res.json(user);
+    }
+
+    else{
+        res.json(null);
+    }
+}

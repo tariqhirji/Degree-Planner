@@ -8,33 +8,33 @@ import './css/LandingCarousel.css'
 export default function LandingCarousel() {
     return (
         <div className="LandingCarousel">
-            <div id="carouselCaptions" class="carousel slide" data-ride="carousel">
+            <div id="carouselCaptions" className="carousel slide" data-ride="carousel">
                 <ol className="carousel-indicators">
-                    <li data-target="#carouselCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselCaptions" data-slide-to="0" className="active"></li>
                     <li data-target="#carouselCaptions" data-slide-to="1"></li>
                     <li data-target="#carouselCaptions" data-slide-to="2"></li>
                 </ol>
 
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src={stock1} class="d-block w-100" alt="carousel 1"/>
-                        <div class="carousel-caption d-none d-md-block">
+                        <img src={stock1} className="d-block w-100" alt="carousel 1"/>
+                        <div className="carousel-caption d-none d-md-block">
                             <h5>First slide label</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
                     </div>
 
                     <div className="carousel-item">
-                        <img src={stock2} class="d-block w-100" alt="carousel 2"/>
-                        <div class="carousel-caption d-none d-md-block">
+                        <img src={stock2} className="d-block w-100" alt="carousel 2"/>
+                        <div className="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
                     </div>
 
                     <div className="carousel-item">
-                        <img src={stock3} class="d-block w-100" alt="carousel 3"/>
-                        <div class="carousel-caption d-none d-md-block">
+                        <img src={stock3} className="d-block w-100" alt="carousel 3"/>
+                        <div className="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
