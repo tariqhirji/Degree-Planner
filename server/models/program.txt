@@ -1,5 +1,0 @@
-Computer Science | CPSC | Major | CPSC1, CPSC2, CPSC3, CPSC4
-Biology | BIO | Major| BIO1, BIO2, BIO3, BIO4
-Mathematics | MATH | Major | MATH1,MATH2,MATH3,MATH4
-Accounting | ACC | Major | 
-Art | ART | Major | ART1, ART2, ART3, ART4
