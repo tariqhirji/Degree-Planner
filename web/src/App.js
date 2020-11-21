@@ -10,8 +10,10 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
-import Home from './containers/Home';
 import Profile from './containers/Profile'
+import UserAcademicForm from './components/UserAcademicForm.jsx';
+import Home from './containers/Home'
+
 
 class App extends Component{
    async componentDidMount(){
@@ -36,6 +38,7 @@ class App extends Component{
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
+                  <Route exact path='/user_settings' component={UserAcademicForm}/>
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>

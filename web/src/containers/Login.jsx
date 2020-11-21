@@ -89,10 +89,10 @@ class Login extends Component{
 
                     <button className="btn btn-success">SUBMIT</button>
 
-                    <div style={{color: 'red'}}>
-                        {errors.map(err => <p>
+                    <div style={{color: 'red'}} className='mt-4'>
+                        {errors.map(err => <div className='mt-3'>
                             {`${err.field} error: ${err.message}`}
-                        </p>)}
+                        </div>)}
                     </div>
                 </form>
             </div>
