@@ -11,6 +11,7 @@ class Login extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.toForgotPassword = this.toForgotPassword.bind(this);
     }
 
     handleChange(e){
@@ -18,21 +19,11 @@ class Login extends Component{
     }
 
     async handleSubmit(e){
-        e.preventDefault(e);
-        const{username, password} = this.state;
-        const data = {
-            username,
-            password
+        e.preventDefault();
+    }
 
-        }
-
-        /*const auth = await login(data);
-        if(auth){
-            alert.success("Success")
-        }else{
-            alert.error("Error Logging In")
-        }
-        */
+    toForgotPassword(){
+        this.props.history.push('/forgot_password');
     }
 
     render(){
@@ -71,7 +62,9 @@ class Login extends Component{
 
                 </form>
                 
-
+                <p onClick={this.toForgotPassword}>
+                    Forgot Password
+                </p>
             </div>
         )
     }
