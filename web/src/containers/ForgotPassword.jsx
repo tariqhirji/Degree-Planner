@@ -65,6 +65,7 @@ class ForgotPassword extends Component{
                     </div>
                 </div>
             </div>
+            </div>
         )
     }
 }
