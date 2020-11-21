@@ -195,3 +195,20 @@ export const getMe = async (req, res) => {
         res.json(null);
     }
 }
+
+export const setAcademia = async(req, res) => {
+    const{university, year, degree, dept, coursesTaken} = req.body;
+    if(req.session.uid){        
+        const user = await User.findByIdAndUpdate({_id: req.session.uid},
+                                                {university: university},
+                                                {yearOfStudy: year},
+                                                {degree: degree},
+                                                {department: dept},
+                                                {coursesTaken: coursesTaken});
+        if(user === null){
+            res.json(null);
+        } else{
+            res.json({success: true});
+        }
+    }
+}
