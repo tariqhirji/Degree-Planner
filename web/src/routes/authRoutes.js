@@ -9,3 +9,12 @@ export const forgotPassword = async (data) => {
     const { success } = response.data;
     return success;
 }
+
+
+export const loginUser = async(data) =>{
+    const response = await axios.post(`${API}/api/user/login`, data, config);
+    return response.data;
+}
+    
+
+    
