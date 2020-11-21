@@ -127,7 +127,7 @@ export const forgotPassword = async (req, res) => {
 
     else{
         const token = v4();
-        const href = `<a href='${process.env.CLIENT}/change_password'>Reset Password</a>`;
+        const href = `<a href='${process.env.CLIENT}/change_password/${token}'>Reset Password</a>`;
 
         await redis.set(
             'forgot-password' + token, //key

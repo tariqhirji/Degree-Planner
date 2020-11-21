@@ -5,7 +5,6 @@ const config = {headers: {'content-type': 'application/json'}, withCredentials: 
 
 export const forgotPassword = async (data) => {
     const response = await axios.post(`${API}/api/user/forgot_password`, data, config);
-    console.log(response);
     const { success } = response.data;
     return success;
 }
