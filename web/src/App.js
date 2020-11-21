@@ -10,6 +10,7 @@ import SignUp from './containers/SignUp.jsx';
 import ForgotPassword from './containers/ForgotPassword';
 import ChangePassword from './containers/ChangePassword';
 import DeadPage from './containers/DeadPage';
+import UserAcademicForm from './components/UserAcademicForm.jsx';
 import Home from './containers/Home'
 
 class App extends Component{
@@ -32,6 +33,7 @@ class App extends Component{
                <Navbar/>
                <Switch>
                   <Route exact path='/' render={() => Home}/>
+                  <Route exact path='/user_settings' component={UserAcademicForm}/>
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
