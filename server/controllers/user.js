@@ -241,3 +241,62 @@ export const setCredentials = async(req, res) => {
         }                                   
     }
 }
+
+export const addCourseToStudent = async(req, res) => {
+    const{id} = req.body;
+    let user, updatedUser;
+    if(req.session.uid){
+        user = await User.findOne({_id: req.session.uid});
+        let newCourses = user.coursesTaken;
+        newCourses.push(id);
+        updatedUser = await User.updateOne({_id: req.session.uid},
+                                {coursesTaken: newCourses});
+
+        //user.coursesTaken.push(courseID);
+        //await user.save();
+        
+    }
+
+    if(user != null){
+        res.json({success:true});
+    } else{
+        res.json({success: false});
+    }
+}
+
+export const deleteCourseFromStudent = async(req, res) => {
+    const{courseID} = req.params;
+    let user;
+    if(req.session.uid){
+        user = await User.findOne({_id: req.session.uid});
+        
+        const index = user.coursesTaken.indexOf(courseID);
+        if(index !== -1){
+        user.coursesTaken.splice(index, 1);
+        console.log("Index: " + index);
+        await user.save();
+        res.json({success: true});
+        } else if(index === -1){
+            console.log("Course Not in List");
+            res.json({success: false});
+        }
+
+    }
+    
+}
+
+export const courseInList = async(req, res) => {
+    const{courseId} = req.params;
+    let exists = false;
+    let user;
+    if(req.session.uid){
+        user = await User.findOne({_id: req.session.uid});
+        for(let i=0; i <= user.coursesTaken.length(); i++){
+            if(user.coursesTaken[i] === courseId){
+                exists = true;
+            }
+        }
+    }
+
+    res.json({exists});
+}

@@ -7,7 +7,10 @@ import {
     logout, 
     register,
     setAcademia,
-    setCredentials 
+    setCredentials, 
+    addCourseToStudent,
+    deleteCourseFromStudent,
+    courseInList
 } from '../controllers/user';
 
 const router = express.Router();
@@ -20,5 +23,8 @@ router.post('/change_password', changePassword);
 router.get('/me', getMe);
 router.post('/academia', setAcademia);
 router.post('/updateCredentials', setCredentials)
+router.post('/addCourse', addCourseToStudent);
+router.delete('/deleteCourse/:courseID', deleteCourseFromStudent);
+router.get('/checkUserCourses', courseInList )
 
 export default router;
