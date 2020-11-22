@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
+import { withAlert } from 'react-alert';
 import { Link } from 'react-router-dom';
 import { getCourseById, getCourseByName } from '../routes/courseRoutes';
-import {addCourse, removeCourse} from '../routes/userRoutes';
+import {addCourse, removeCourse, checkUserCourse } from '../routes/userRoutes';
 import Sidebar from '../components/Sidebar';
 import Requisites from '../components/Requisites';
 import './css/CourseInfo.css'
@@ -16,7 +17,8 @@ class CourseInfo extends Component{
             dept: '',
             desc: '',
             link: '',
-            preq: []
+            preq: [], 
+            exists: false
         };
 
         this.getCourseData = this.getCourseData.bind(this);
@@ -29,8 +31,9 @@ class CourseInfo extends Component{
         const { id } = this.props.match.params;    
 
         const course = await this.getCourseData(id);
+        const exists = await this.checkIfAdded(id);
      
-        this.setState({...course});
+        this.setState({...course, exists});
     }
 
     async componentDidUpdate(prevProps){
@@ -38,8 +41,15 @@ class CourseInfo extends Component{
 
         if(id !== prevProps.match.params.id){
             const course = await this.getCourseData(id);
-            this.setState({...course});
+            const exists = await this.checkIfAdded(id);
+
+            this.setState({...course, exists});
         }
+    }
+
+    async checkIfAdded(id){
+        const exists = await checkUserCourse(id);
+        return exists;
     }
 
     async getCourseData(id){
@@ -71,27 +81,34 @@ class CourseInfo extends Component{
 
     async handleAdd(){
         const{id} = this.props.match.params;
+        const {alert} = this.props;
+
         const response = await addCourse({id});
+
         if(!response){
-            alert("Error adding course to your course list");
+            alert.error("Error adding course to your course list");
         }else{
-            alert("Successfully added course to your list");
+            this.setState({exists: true});
+            alert.success("Successfully added course to your list");
         }
     }
 
     async handleRemove(){
         const{id} = this.props.match.params;
+        const {alert} = this.props;
+
         const response = await removeCourse({id});
-        alert(response);
+
         if(!response){
-            alert("Error removing course from your course list");
+            alert.error("Error removing course from your course list");
         }else{
-            alert("Successfully removed course to your list");
+            this.setState({exists: false});
+            alert.success("Successfully removed course from your list");
         }
     }
 
     render(){
-        const {name, cred,creq,dept,desc,link,preq} =this.state;
+        const {name, cred,creq,dept,desc,link,preq, exists} =this.state;
        
         return(
             <div>
@@ -111,18 +128,20 @@ class CourseInfo extends Component{
                     {cred?<p>Credits: {cred}</p> : null}
                     <label htmlFor="courseLink"><strong>For More Info:</strong> </label>
                     <Link className="ml-2"  to={link} id="courseLink">{link}</Link>
-                    <div className="row">
-                        {/* TODO - Conditionally render which button --> Add to Courses / Remove Course */}
-                        <button className="btn btn-secondary ml-3 mt-3" onClick={this.handleAdd}>
-                            Add to Courses
-                        </button>
-                    </div>
-                    <div className="row">
-                        {/* TODO - Conditionally render which button --> Add to Courses / Remove Course */}
-                        <button className="btn btn-danger ml-3 mt-3" onClick={this.handleRemove}>
-                            Remove Course 
-                        </button>
-                    </div>
+                    {!exists?
+                        (<div className="row">
+                            {/* TODO - Conditionally render which button --> Add to Courses / Remove Course */}
+                            <button className="btn btn-secondary ml-3 mt-3" onClick={this.handleAdd}>
+                                Add to Courses
+                            </button>
+                        </div>):
+                        (<div className="row">
+                            {/* TODO - Conditionally render which button --> Add to Courses / Remove Course */}
+                            <button className="btn btn-danger ml-3 mt-3" onClick={this.handleRemove}>
+                                Remove Course 
+                            </button>
+                        </div>)
+                    }
                 </div>
 
             </div>
@@ -132,4 +151,4 @@ class CourseInfo extends Component{
 
 }
 
-export default CourseInfo;
+export default withAlert()(CourseInfo);

@@ -64,7 +64,7 @@ class ProfileCard extends Component {
             const user = await getMe();
             this.props.dispatch(setUser(user));
 
-            this.props.alert.success(`new Name: ${fullName}, new email: ${email}`)
+            this.props.alert.success(`new name: ${fullName}, new email: ${email}`)
         }else{
             this.props.alert.error("Failed to Update Credentials")
         }
@@ -92,7 +92,7 @@ class ProfileCard extends Component {
             const user = await getMe();
             this.props.dispatch(setUser(user));
 
-            this.props.alert.success(`new yearOfStudy: ${yearOfStudy}, new degree: ${degree}, new department: ${department}`)
+            this.props.alert.success(`new year of study: ${yearOfStudy}, new degree: ${degree}, new department: ${department}`)
         }else{
             this.props.alert.error("Failed to update academia infomation")
         }
@@ -101,7 +101,6 @@ class ProfileCard extends Component {
     render() {
         const { username, fullName, email, yearOfStudy, degree, department } = this.state;
         
-
         return (
             <div className="ProfileCard col-12">
                 <div className="card rounded">

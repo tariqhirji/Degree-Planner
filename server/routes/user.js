@@ -25,6 +25,6 @@ router.post('/academia', setAcademia);
 router.post('/updateCredentials', setCredentials)
 router.post('/addCourse', addCourseToStudent);
 router.delete('/deleteCourse/:courseID', deleteCourseFromStudent);
-router.get('/checkUserCourses', courseInList )
+router.get('/checkUserCourses/:courseId', courseInList )
 
 export default router;

@@ -31,6 +31,6 @@ export const removeCourse = async(data) =>{
 
 export const checkUserCourse = async(id) =>{
     const response = await axios.get(`${API}/api/user/checkUserCourses/${id}`);
-    const {success} = response.data;
-    return success;
+    const {exists} = response.data;
+    return exists;
 }

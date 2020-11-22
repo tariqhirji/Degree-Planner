@@ -64,6 +64,7 @@ export const orderCourses = async ( req, res) => {
 
     const list = courses[idx];
     
+    const courseMap = {};
     const adjList = {};
     const indegree = {};
     const copy = {};
@@ -72,9 +73,21 @@ export const orderCourses = async ( req, res) => {
         //prereqs themselves
         adjList[list[i].code] = [...list[i].preq];
 
+        //courses
+        courseMap[list[i].code] = list[i];
+
         //num prereqs
-        indegree[list[i].code] = list[i].preq.length;
-        copy[list[i].code] = list[i].preq.length;
+        indegree[list[i].code] = 0;
+        copy[list[i].code] = 0;
+
+        for(let j=0;j<list[i].preq.length;j++){
+            if(Number(list[i].preq[j].split(" ")[1][0]) === year){
+
+                indegree[list[i].code] ++;
+                copy[list[i].code] ++;
+                
+            }
+        }
     }
 
     let result = [];
@@ -87,10 +100,10 @@ export const orderCourses = async ( req, res) => {
     }
 
     while(queue.length !== 0){
-        let curr = queue.unshift();
+        let curr = queue.shift();
         const { code } = curr;
         
-        res.add({
+        result.push({
             code,
             numPreqs: copy[code]
         });
@@ -99,10 +112,10 @@ export const orderCourses = async ( req, res) => {
             indegree[adjList[code][i]]--;
 
             if(indegree[adjList[code][i]] === 0){
-                //queue.push
+                queue.push(courseMap[adjList[code][i]]);
             }
         }
     }
 
-    res.json(adjList);
+    res.json(result);
 }
