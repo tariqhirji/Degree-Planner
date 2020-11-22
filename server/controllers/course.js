@@ -25,9 +25,19 @@ export const migrateApiData = async (req, res) => {
     const data = response.data;
 
     data.forEach(async c => {
+        const preq = c.preq.filter(s => {
+            const firstWord = s.split(" ")[0];
+            return firstWord.length === 3 || firstWord.length === 4;
+        });
+
+        const creq = c.creq.filter(s => {
+            const firstWord = s.split(" ")[0];
+            return firstWord.length === 3 || firstWord.length === 4;
+        });
+
         const newCourse = new Course({
-            preq: c.preq,
-            creq: c.creq,
+            preq: preq,
+            creq: creq,
             dept: c.dept,
             code: c.code,
             name: c.code,
