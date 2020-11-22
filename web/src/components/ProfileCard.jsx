@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './css/ProfileCard.css'
 import {updateCreds, academia} from "../routes/userRoutes";
+import {withAlert} from 'react-alert';
 
 
 class ProfileCard extends Component {
@@ -57,9 +58,9 @@ class ProfileCard extends Component {
         }
         const response = await updateCreds(data);
         if(response){
-            alert(`new Name: ${name}, new email: ${email}`)
+            this.props.alert.success(`new Name: ${name}, new email: ${email}`)
         }else{
-            alert("Failed to Update Credentials")
+            this.props.alert.error("Failed to Update Credentials")
         }
     }
 
@@ -80,9 +81,9 @@ class ProfileCard extends Component {
         };
         const result = await academia(data);
         if(result){
-        alert(`new year: ${year}, new degree: ${degree}, new department: ${department}`)
+        this.props.alert.success(`new year: ${year}, new degree: ${degree}, new department: ${department}`)
         }else{
-            alert("Failed to update academia infomation")
+            this.props.alert.error("Failed to update academia infomation")
         }
     }
 
@@ -222,4 +223,4 @@ class ProfileCard extends Component {
     }
 }
 const mapStateToProps = (state) => ({user : state.user});
-export default withRouter(connect(mapStateToProps)(ProfileCard));
+export default withRouter(connect(mapStateToProps)( withAlert()(ProfileCard)));
