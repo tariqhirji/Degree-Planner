@@ -85,6 +85,11 @@ function ResponsiveDrawer(props) {
       if(text === "Home") {
         props.history.push('/')
       }
+
+      //Courses
+      if (text === 'Courses') {
+        props.history.push('/courses');
+      }
   }
 
   const drawer = (
