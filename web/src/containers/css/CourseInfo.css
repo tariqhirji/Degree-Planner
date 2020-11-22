@@ -1,5 +1,3 @@
-
-
 .courseInfoContainer {
     background-color: lightgray;
     height: 100vh;
@@ -8,9 +6,6 @@
     position: fixed;
 }
 
-.courseInfoContainer .courseInfo{
-    
-}
 .courseInfoContainer .deptLabel{
     font-size: 30px;
 }

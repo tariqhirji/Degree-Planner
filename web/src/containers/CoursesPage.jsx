@@ -1,9 +1,9 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
 import Sidebar from '../components/Sidebar';
 import {getUserCourses} from '../routes/userRoutes';
-import './css/Courses.css';
+import './css/CoursesPage.css';
 
-class Courses extends Component{
+class CoursesPage extends Component{
     constructor(){
         super();
         this.state ={
@@ -24,19 +24,16 @@ class Courses extends Component{
             <div className='Courses'>
                 <Sidebar/>
                 <div className="Courses-Info" >
-                <div className="container h-100 w-100">
-                    <div className="row justify-content-center align-items-center text-center h-100 w-100">
-                        <div className="col-12">
-                            <h1>Your Courses </h1>
-                            
+                    <div className="container h-100 w-100">
+                        <div className="row justify-content-center align-items-center text-center h-100 w-100">
+                            <div className="col-12">
+                                <h1>Your Courses </h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                
-            </div>
             </div>
         )
     }
 }
-export default Courses;
+export default CoursesPage;
