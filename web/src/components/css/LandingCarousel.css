@@ -1,3 +1,11 @@
 .LandingCarousel img {
     height: 92vh;
 }
+
+.carousel-caption{
+    background: #4f2683;
+}
+
+.LandingCarousel h5, .LandingCarousel p{
+    color: white;
+}
