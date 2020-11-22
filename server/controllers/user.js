@@ -223,16 +223,16 @@ export const setAcademia = async(req, res) => {
 }
 
 export const setCredentials = async(req, res) => {
-    const{email, name} = req.body;
+    const{email, fullName} = req.body;
     let user;
     if(req.session.uid){
         if(email){
             user = await User.updateOne( {_id: req.session.uid},
                                         {email: email});
         }
-        if(name){
+        if(fullName){
             user = await User.updateOne( {_id: req.session.uid},
-                                            {fullName: name});
+                                            {fullName});
         }
         if(user != null){
             res.json({success:true})
