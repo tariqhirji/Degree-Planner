@@ -2,6 +2,7 @@ import { API } from '../constants';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
+const config = {headers: {'content-type': 'application/json'}};
 
 export const getCourseById = async (id) => {
     const response = await axios.get(`${API}/api/course/${id}`);
@@ -17,6 +18,12 @@ export const getCourseByName = async (name) => {
 
 export const getCoursesByDepartment = async (dept) => {
     const response = await axios.get(`${API}/api/course/dept/${dept}`);
+    const courses = response.data;
+    return courses;
+}
+
+export const getCoursePathData = async (data) => {
+    const response = await axios.post(`${API}/api/course/order`, data, config);
     const courses = response.data;
     return courses;
 }

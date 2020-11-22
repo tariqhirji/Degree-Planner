@@ -1,11 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Sidebar from '../components/Sidebar'
 import './css/Home.css';
 
-export default function Home() {
-    return (
-        <div className="Home">
-            <Sidebar />
-        </div>
-    )
+class Home extends Component {
+    constructor(){
+        super();
+
+        this.state = {
+            courses: []
+        }
+    }
+
+    componentDidMount(){
+
+    }
+
+    render(){
+        return (
+            <div className="Home">
+                <Sidebar />
+
+
+            </div>
+        )
+    }
 };
+
+export default Home;
