@@ -3,4 +3,29 @@
     width: calc(100% - 240px);
     margin-left: 240px;
     background-color: lightgray;
+    position: fixed;
+    overflow: auto;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.home-container{
+    position: absolute;
+    width: 500px;
+    right: 80px;
+    top: 80px;
+}
+
+.home-container select{
+   width: 300px;
+   padding: 6px;
+}
+
+.Home .course{
+    cursor: pointer;
+    margin: 10px auto;
+    border: 2px solid black;
+}
+
+.Home .course:hover{
+    background: white;
 }

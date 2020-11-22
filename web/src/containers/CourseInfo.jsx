@@ -69,7 +69,7 @@ class CourseInfo extends Component{
             const course = await getCourseByName(requisite[i]);
 
             const obj = {};
-            
+            console.log(course.name);
             obj.name = course.name;
             obj._id = course._id;
 
