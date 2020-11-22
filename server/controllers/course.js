@@ -1,23 +1,12 @@
 import Course from '../models/course';
+import { filterCourses } from '../utils/filterCourses';
 import axios from 'axios';
 
 export const getCoursesByDepartment = async (req, res) => {
     const { dept } = req.params;
-    const result = [ [], [], [], []];
+    const courses = await filterCourses(dept);
 
-    const courses = await Course.find({dept});
-
-    courses.forEach(c => {
-        for(let i=0;i<c.code.length;i++){
-            if(c.code[i] >= '0' && c.code[i] <= '9'){
-                const idx = Number(c.code[i] - 1);
-                result[idx].push(c);
-                break;
-            }
-        }
-    });
-
-    res.json(result);
+    res.json(courses);
 }
 
 export const migrateApiData = async (req, res) => {
@@ -65,4 +54,55 @@ export const getCourseByName  = async (req, res) => {
     const { name } = req.params;
     const course = await Course.findOne({name});
     res.json(course);
+}
+
+export const orderCourses = async ( req, res) => {
+    const { dept, year } = req.body;
+    
+    const courses = await filterCourses(dept, year);
+    let idx = (year < 4) ? year - 1: 3;
+
+    const list = courses[idx];
+    
+    const adjList = {};
+    const indegree = {};
+    const copy = {};
+
+    for(let i=0;i<list.length;i++){
+        //prereqs themselves
+        adjList[list[i].code] = [...list[i].preq];
+
+        //num prereqs
+        indegree[list[i].code] = list[i].preq.length;
+        copy[list[i].code] = list[i].preq.length;
+    }
+
+    let result = [];
+    let queue = [];
+
+    for(let i=0;i<list.length;i++){
+        if(indegree[list[i].code] === 0){
+            queue.push(list[i]);
+        }
+    }
+
+    while(queue.length !== 0){
+        let curr = queue.unshift();
+        const { code } = curr;
+        
+        res.add({
+            code,
+            numPreqs: copy[code]
+        });
+
+        for(let i=0;i<adjList[code].length;i++){
+            indegree[adjList[code][i]]--;
+
+            if(indegree[adjList[code][i]] === 0){
+                //queue.push
+            }
+        }
+    }
+
+    res.json(adjList);
 }
