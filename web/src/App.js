@@ -36,7 +36,7 @@ class App extends Component{
                   <Route exact path='/profile' component={Profile}/> 
                   <Route exact path ='/login' component={Login}/>
                   <Route exact path ='/register' component={SignUp}/>
-                  <Route exact path ='/departments' component={DepartmentInfo}/>
+                  <Route exact path ='/departments/:id' component={DepartmentInfo}/>
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
                   <Route exact path='/course/:id' component={CourseInfo}/>

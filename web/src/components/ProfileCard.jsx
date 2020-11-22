@@ -1,23 +1,40 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import './css/ProfileCard.css'
 import {updateCreds, academia} from "../routes/userRoutes";
 
 
 class ProfileCard extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            username: this.props.user.username,
-            name: this.props.user.fullName,
-            email: this.props.user.email,
-            year: this.props.user.yearOfStudy,
-            degree: this.props.user.degree,
-            department: this.props.user.department,
+            username: '',
+            name: '',
+            email: '',
+            year: 0,
+            degree: '',
+            department: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit1 = this.handleSubmit1.bind(this);
         this.handleSubmit2 = this.handleSubmit2.bind(this);
+    }
+
+    componentDidMount(){
+        const { user } = this.props;
+
+        if(user){
+            this.setState({...user});
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        const { user } = this.props;
+
+        if(user && !prevProps.user){
+            this.setState({...user});
+        }
     }
 
     handleChange(e){
@@ -26,7 +43,14 @@ class ProfileCard extends Component {
 
     async handleSubmit1(e){
         const {name, email} = this.state
+        const { user } = this.props;
         e.preventDefault();
+
+        if(!user){
+            this.props.history.push('/');
+            return;
+        }
+
         const data = {
             name,
             email
@@ -41,7 +65,13 @@ class ProfileCard extends Component {
 
     async handleSubmit2(e){
         const {year, degree, department} = this.state
+        const {user} = this.props;
         e.preventDefault();
+
+        if(!user){
+            this.props.history.push('/');
+            return;
+        }
 
         const data = {
             year,
@@ -192,4 +222,4 @@ class ProfileCard extends Component {
     }
 }
 const mapStateToProps = (state) => ({user : state.user});
-export default connect(mapStateToProps)(ProfileCard);
+export default withRouter(connect(mapStateToProps)(ProfileCard));

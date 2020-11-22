@@ -1,15 +1,9 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import ProfileCard from '../components/ProfileCard'
 import Sidebar from '../components/Sidebar'
 import './css/Profile.css'
 
-function Profile({signedIn}){
-    if(!signedIn){
-        return <Redirect to='/'/>
-    }
-
+function Profile(){
     return (
         <div className="Profile">
             <Sidebar />
@@ -26,6 +20,4 @@ function Profile({signedIn}){
     )
 }
 
-const mapStateToProps = (state) => ({signedIn: state.signedIn});
-
-export default connect(mapStateToProps)(Profile);
+export default Profile;

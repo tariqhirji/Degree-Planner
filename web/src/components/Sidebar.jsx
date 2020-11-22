@@ -66,8 +66,11 @@ function ResponsiveDrawer(props) {
       // Logout
       if(text === 'Logout'){
           const { dispatch } = props;
+          
           await logout();
           dispatch(setUser(null));
+          
+          props.history.push('/');
       }
       // Profile
       if (text === 'Profile') {
@@ -75,7 +78,7 @@ function ResponsiveDrawer(props) {
       }
 
       if(text === 'Departments'){
-        props.history.push('/departments');
+        props.history.push(`/departments/home`);
       }
 
       //Home
