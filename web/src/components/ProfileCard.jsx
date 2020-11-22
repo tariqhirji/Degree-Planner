@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'; 
 import { connect } from 'react-redux';
-import './css/ProfileCard.css'
+import { getMe } from '../routes/authRoutes';
+import { setUser } from '../store/userActions'; 
 import {updateCreds, academia} from "../routes/userRoutes";
 import {withAlert} from 'react-alert';
-
+import './css/ProfileCard.css';
 
 class ProfileCard extends Component {
     constructor() {
         super();
         this.state = {
             username: '',
-            name: '',
+            fullName: '',
             email: '',
-            year: 0,
+            yearOfStudy: 0,
             degree: '',
             department: '',
         }
@@ -33,7 +34,7 @@ class ProfileCard extends Component {
     componentDidUpdate(prevProps){
         const { user } = this.props;
 
-        if(user && !prevProps.user){
+        if((user && !prevProps.user)){
             this.setState({...user});
         }
     }
@@ -43,7 +44,7 @@ class ProfileCard extends Component {
     }
 
     async handleSubmit1(e){
-        const {name, email} = this.state
+        const {fullName, email} = this.state
         const { user } = this.props;
         e.preventDefault();
 
@@ -53,19 +54,24 @@ class ProfileCard extends Component {
         }
 
         const data = {
-            name,
+            fullName,
             email
-        }
+        };
+
         const response = await updateCreds(data);
+        
         if(response){
-            this.props.alert.success(`new Name: ${name}, new email: ${email}`)
+            const user = await getMe();
+            this.props.dispatch(setUser(user));
+
+            this.props.alert.success(`new Name: ${fullName}, new email: ${email}`)
         }else{
             this.props.alert.error("Failed to Update Credentials")
         }
     }
 
     async handleSubmit2(e){
-        const {year, degree, department} = this.state
+        const {yearOfStudy, degree, department} = this.state
         const {user} = this.props;
         e.preventDefault();
 
@@ -75,20 +81,25 @@ class ProfileCard extends Component {
         }
 
         const data = {
-            year,
+            yearOfStudy,
             degree,
             department
         };
+
         const result = await academia(data);
+
         if(result){
-        this.props.alert.success(`new year: ${year}, new degree: ${degree}, new department: ${department}`)
+            const user = await getMe();
+            this.props.dispatch(setUser(user));
+
+            this.props.alert.success(`new yearOfStudy: ${yearOfStudy}, new degree: ${degree}, new department: ${department}`)
         }else{
             this.props.alert.error("Failed to update academia infomation")
         }
     }
 
     render() {
-        const { username, name, email, year, degree, department } = this.state;
+        const { username, fullName, email, yearOfStudy, degree, department } = this.state;
         
 
         return (
@@ -129,8 +140,8 @@ class ProfileCard extends Component {
                                     type="text" 
                                     placeholder="Name" 
                                     onChange={this.handleChange}
-                                    value={name}
-                                    name="name"
+                                    value={fullName}
+                                    name="fullName"
                                 />
                             </div>
                         </div>
@@ -169,10 +180,10 @@ class ProfileCard extends Component {
                                     <input
                                         className="form-control"
                                         type="number" 
-                                        placeholder="Year of study" 
+                                        placeholder="yearOfStudy of study" 
                                         onChange={this.handleChange}
-                                        value={year}
-                                        name="year"
+                                        value={yearOfStudy}
+                                        name="yearOfStudy"
                                         min = '0'
                                         max = '6'
                                     />
@@ -223,4 +234,6 @@ class ProfileCard extends Component {
     }
 }
 const mapStateToProps = (state) => ({user : state.user});
-export default withRouter(connect(mapStateToProps)( withAlert()(ProfileCard)));
+const mapDispatchToProps = (dispatch) => ({dispatch});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)( withAlert()(ProfileCard)));
