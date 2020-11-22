@@ -13,13 +13,14 @@ export default function LandingCarousel() {
                     <li data-target="#carouselCaptions" data-slide-to="0" className="active"></li>
                     <li data-target="#carouselCaptions" data-slide-to="1"></li>
                     <li data-target="#carouselCaptions" data-slide-to="2"></li>
+                    <li data-target="#carouselCaptions" data-slide-to="3"></li>
                 </ol>
 
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src={stock1} className="d-block w-100" alt="carousel 1"/>
                         <div className="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
+                            <h5>Visualize your degree!</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
                     </div>
@@ -27,7 +28,7 @@ export default function LandingCarousel() {
                     <div className="carousel-item">
                         <img src={stock2} className="d-block w-100" alt="carousel 2"/>
                         <div className="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
+                            <h5>Explore courses from any department</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
                     </div>
@@ -35,7 +36,15 @@ export default function LandingCarousel() {
                     <div className="carousel-item">
                         <img src={stock3} className="d-block w-100" alt="carousel 3"/>
                         <div className="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
+                            <h5>Manage your courses and plan ahead</h5>
+                            <p>Lorem ipsum blah blah blah blah</p>
+                        </div>
+                    </div>
+
+                    <div className="carousel-item">
+                        <img src={stock2} className="d-block w-100" alt="carousel 4"/>
+                        <div className="carousel-caption d-none d-md-block">
+                            <h5>Navigate through courses and prerequisites</h5>
                             <p>Lorem ipsum blah blah blah blah</p>
                         </div>
                     </div>
