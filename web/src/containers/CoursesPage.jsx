@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
 import Sidebar from '../components/Sidebar';
 import {getUserCourses,removeCourse} from '../routes/userRoutes';
 import CourseCard from '../components/CourseCard';
@@ -10,6 +10,7 @@ class CoursesPage extends Component{
         this.state ={
             courseList: []
         }
+
         this.handleRemove = this.handleRemove.bind(this);
     }
 
@@ -29,8 +30,10 @@ class CoursesPage extends Component{
         const courses = courseList.map( item =>{
         return <li className="list-group-item p-0"> <CourseCard course = {item} handleRemove ={this.handleRemove} /> </li>
         });
-        ///console.log(courseList);
-        console.log(courseList);
+
+    render(){
+        const{courseList} = this.state;
+
         return(
             <div className='Courses'>
                 <Sidebar/>

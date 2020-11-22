@@ -57,25 +57,11 @@ export const getCourseByName  = async (req, res) => {
 }
 
 export const orderCourses = async ( req, res) => {
-    const { dept, year } = req.body;
-    
-    const courses = await filterCourses(dept, year);
-    let idx = (year < 4) ? year - 1: 3;
-
-    const prev = idx === 0? [] : courses[idx - 1];
-    const current = courses[idx];
+    const { dept } = req.body;
+    const courses = await Course.find({dept});     
 
     const prereqs = [];
-    prev.forEach(p => {
-        const { preq } = p; 
-
-        for(let i=0;i<preq.length;i++){
-            if(preq[i].split(" ")[0] === p.code.split(" ")[0] && Number(p.code.split(" ")[1][0]) === year - 1){
-                prereqs.push([p.code , preq[i]]);
-            }
-        }
-    });
-    current.forEach(c => {
+    courses.forEach(c => {
         const { preq } = c; 
 
         for(let i=0;i<preq.length;i++){
@@ -88,11 +74,7 @@ export const orderCourses = async ( req, res) => {
     const indegree = {};
     const orgDegree = {};
 
-    prev.forEach(p => {
-        indegree[p.code] = 0;
-        orgDegree[p.code] = 0;
-    }); 
-    current.forEach(c => {
+    courses.forEach(c => {
         indegree[c.code] = 0;
         orgDegree[c.code] =0;
     });
@@ -108,14 +90,7 @@ export const orderCourses = async ( req, res) => {
     let queue = [];
     const courseMap = {};
     
-    prev.forEach(p => {
-        if(indegree[p.code] === 0){
-            queue.push(p.code);
-        }
-
-        courseMap[p.code] = p;
-    }); 
-    current.forEach(c => {
+    courses.forEach(c => {
         if(indegree[c.code] === 0){
             queue.push(c.code);
         }
