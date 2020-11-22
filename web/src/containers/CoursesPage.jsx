@@ -31,9 +31,6 @@ class CoursesPage extends Component{
         return <li className="list-group-item p-0"> <CourseCard course = {item} handleRemove ={this.handleRemove} /> </li>
         });
 
-    render(){
-        const{courseList} = this.state;
-
         return(
             <div className='Courses'>
                 <Sidebar/>
@@ -50,8 +47,9 @@ class CoursesPage extends Component{
                 </div>
 
                 
+             </div>
             </div>
-            </div>
+
         )
     }
 }

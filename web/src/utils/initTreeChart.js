@@ -67,12 +67,9 @@ const formatData = (jsonObj, dept) => {
  
     for(let i=0;i<jsonObj.length;i++){
         if(Number(jsonObj[i].code.split(" ")[1][0]) === 1){
-            const str = stringifyPrereqs(jsonObj[i].course.preq);
-       
             first.children.push({
                 name: jsonObj[i].code,
-                lineStyle: {color: 'gray'},
-                value: str
+                lineStyle: {color: 'gray'}
             });
         }
     }
@@ -87,7 +84,6 @@ const formatData = (jsonObj, dept) => {
             
             second.children.push({
                 name: jsonObj[i].code,
-                value: stringifyPrereqs(jsonObj[i].course.preq),
                 lineStyle : {color: 'gray'}
             });
         }
@@ -103,7 +99,6 @@ const formatData = (jsonObj, dept) => {
             
             third.children.push({
                 name: jsonObj[i].code,
-                value: stringifyPrereqs(jsonObj[i].course.preq),
                 lineStyle : {color: 'gray'}
             });
         }
@@ -119,7 +114,6 @@ const formatData = (jsonObj, dept) => {
             
             fourth.children.push({
                 name: jsonObj[i].code,
-                value: stringifyPrereqs(jsonObj[i].course.preq),
                 lineStyle : {color: 'gray'}
             });
         }
@@ -131,14 +125,4 @@ const formatData = (jsonObj, dept) => {
     result.children.push(fourth);
     
     return result;
-}
-
-const stringifyPrereqs = (preq) => {
-    let str = '';
-
-    for(let i=0;i<preq.length;i++){
-        str += preq[i] + '\n';
-    }
-
-    return str;
 }

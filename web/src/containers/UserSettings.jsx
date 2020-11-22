@@ -3,10 +3,6 @@ import UserAcademicForm from '../components/UserAcademicForm'
 
 
 class UserSettings extends Component{
-    constructor(){
-        super();
-    }
-
     render(){
         return(
             <div className='settings'>
