@@ -10,7 +10,8 @@ import {
     setCredentials, 
     addCourseToStudent,
     deleteCourseFromStudent,
-    courseInList
+    courseInList,
+    getAllCourses
 } from '../controllers/user';
 
 const router = express.Router();
@@ -26,5 +27,6 @@ router.post('/updateCredentials', setCredentials)
 router.post('/addCourse', addCourseToStudent);
 router.delete('/deleteCourse/:courseID', deleteCourseFromStudent);
 router.get('/checkUserCourses/:courseId', courseInList )
+router.get('/getAllCourses', getAllCourses );
 
 export default router;

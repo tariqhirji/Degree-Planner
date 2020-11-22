@@ -3,6 +3,7 @@ import { sendEmail } from '../utils/sendEmail';
 import bcrypt from 'bcrypt';
 import { redis } from '../app';
 import { v4 } from 'uuid';
+import Course from '../models/course';
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
@@ -308,4 +309,22 @@ export const courseInList = async(req, res) => {
     }
 
     res.json({exists});
+}
+
+export const getAllCourses = async(req, res) =>{
+    let user, userCourses;
+
+    if(req.session.uid){
+
+        user = await User.findOne({_id: req.session.uid});
+        const {coursesTaken} = user;
+        userCourses = [];
+        for(let i=0; i < coursesTaken.length; i++ ){
+            const course = await Course.findOne({_id: coursesTaken[i]});
+            userCourses.push(course);
+        }
+        res.json(userCourses);
+    } else{
+    res.json({success: false});
+    }
 }

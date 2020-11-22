@@ -1,0 +1,8 @@
+.Courses-Info{
+    height: 100vh;
+    width: calc(100% - 240px);
+    margin-left: 240px;
+    background: lightgray;
+    font-family: 'Chakra Petch', sans-serif;
+    position: fixed;
+}

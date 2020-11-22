@@ -34,3 +34,9 @@ export const checkUserCourse = async(id) =>{
     const {exists} = response.data;
     return exists;
 }
+
+export const getUserCourses = async() =>{
+    const response = await axios.get(`${API}/api/user/getAllCourses`);
+    const data = response.data;
+    return data;
+}
