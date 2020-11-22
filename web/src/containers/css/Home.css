@@ -5,6 +5,7 @@
     background-color: lightgray;
     position: fixed;
     overflow: auto;
+    font-family: 'Chakra Petch', sans-serif;
 }
 
 .home-container{
@@ -17,4 +18,14 @@
 .home-container select{
    width: 300px;
    padding: 6px;
+}
+
+.Home .course{
+    cursor: pointer;
+    margin: 10px auto;
+    border: 2px solid black;
+}
+
+.Home .course:hover{
+    background: white;
 }

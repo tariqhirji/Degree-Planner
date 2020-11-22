@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import { getAllDepartments } from '../routes/departmentRoutes';
 import { getCoursePathData } from '../routes/courseRoutes';
 import { initTreeChart } from '../utils/initTreeChart';
@@ -13,10 +14,12 @@ class Home extends Component {
         this.state = {
             options: {},
             departmentName: null,
-            departments: []
+            departments: [],
+            courses: []
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.toCourse  = this.toCourse.bind(this);
     }
 
     async componentDidMount(){
@@ -31,13 +34,18 @@ class Home extends Component {
         const options = initTreeChart(courses, dept);
 
         this.setState({
+            courses,
             departmentName: dept,
             options
         });
     }
 
+    toCourse(id){
+        this.props.history.push(`/course/${id}`);
+    }
+
     render(){
-        const { options, departmentName, departments } = this.state;
+        const { options, departmentName, departments, courses } = this.state;
 
         const style = {
             height: '100%',
@@ -65,10 +73,17 @@ class Home extends Component {
                             </option>
                         )}
                     </select>
+
+                    {courses.map(c => 
+                        <div onClick={() => this.toCourse(c.course._id)} className='course'>
+                            <p>{c.code}</p>
+                            <p>Number of prerequisites: {c.numPreqs}</p>
+                        </div>
+                    )}
                 </div>
             </div>
         )
     }
 };
 
-export default Home;
+export default withRouter(Home);

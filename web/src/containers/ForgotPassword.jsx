@@ -22,7 +22,7 @@ class ForgotPassword extends Component{
     async handleSubmit(e){
         e.preventDefault();
         const { email } = this.state;
-        
+ 
         await forgotPassword({email});
         
         this.setState({submitted: true});
@@ -47,18 +47,17 @@ class ForgotPassword extends Component{
                                     <div className="form-group">
                                         <input
                                             name="email"
-                                            type="email"
                                             value={email}
                                             onChange={this.handleChange}
                                             required
                                             placeholder="Email"
                                             className="my-4 form-control"
                                         />
-                                        <br/>
-                                        <button className="btn submitBtn" type="button">
-                                            Submit
-                                        </button>
                                     </div>
+
+                                    <button className="btn submitBtn" type="button">
+                                            Submit
+                                    </button>
                                 </form> 
                             </div> : <div className ='card-body mt-3'>{header}</div>}
                         </div>

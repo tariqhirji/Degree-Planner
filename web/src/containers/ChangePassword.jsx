@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setUser } from '../store/userActions';
 import { changePassword } from '../routes/authRoutes';
 import './css/ChangePassword.css'
 class ChangePassword extends Component{
@@ -29,6 +31,7 @@ class ChangePassword extends Component{
         const { user} = userResponse;
 
         if(user){
+            this.props.dispatch(setUser(user));
             this.props.history.push('/');
         }
     }
@@ -62,4 +65,6 @@ class ChangePassword extends Component{
     }
 }
 
-export default ChangePassword;
+const mapDispatchToProps = (dispatch) => ({dispatch});
+
+export default connect(mapDispatchToProps)(ChangePassword);
