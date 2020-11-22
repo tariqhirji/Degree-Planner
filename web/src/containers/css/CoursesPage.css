@@ -5,4 +5,5 @@
     background: lightgray;
     font-family: 'Chakra Petch', sans-serif;
     position: fixed;
+    overflow-y: scroll
 }
