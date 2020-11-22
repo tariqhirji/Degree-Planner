@@ -62,57 +62,79 @@ export const orderCourses = async ( req, res) => {
     const courses = await filterCourses(dept, year);
     let idx = (year < 4) ? year - 1: 3;
 
-    const list = courses[idx];
-    
-    const courseMap = {};
-    const adjList = {};
-    const indegree = {};
-    const copy = {};
+    const prev = idx === 0? [] : courses[idx - 1];
+    const current = courses[idx];
 
-    for(let i=0;i<list.length;i++){
-        //prereqs themselves
-        adjList[list[i].code] = [...list[i].preq];
+    const prereqs = [];
+    prev.forEach(p => {
+        const { preq } = p; 
 
-        //courses
-        courseMap[list[i].code] = list[i];
-
-        //num prereqs
-        indegree[list[i].code] = 0;
-        copy[list[i].code] = 0;
-
-        for(let j=0;j<list[i].preq.length;j++){
-            if(Number(list[i].preq[j].split(" ")[1][0]) === year){
-
-                indegree[list[i].code] ++;
-                copy[list[i].code] ++;
-                
+        for(let i=0;i<preq.length;i++){
+            if(preq[i].split(" ")[0] === p.code.split(" ")[0] && Number(p.code.split(" ")[1][0]) === year - 1){
+                prereqs.push([p.code , preq[i]]);
             }
+        }
+    });
+    current.forEach(c => {
+        const { preq } = c; 
+
+        for(let i=0;i<preq.length;i++){
+            if(preq[i].split(" ")[0] === c.code.split(" ")[0]){
+                prereqs.push([c.code , preq[i]]);
+            }
+        }
+    });
+
+    const indegree = {};
+    const orgDegree = {};
+
+    prev.forEach(p => {
+        indegree[p.code] = 0;
+        orgDegree[p.code] = 0;
+    }); 
+    current.forEach(c => {
+        indegree[c.code] = 0;
+        orgDegree[c.code] =0;
+    });
+
+    for(let i=0;i<prereqs.length;i++){
+        if(indegree[prereqs[i][0]] === 0){
+            indegree[prereqs[i][0]]++;       
+            orgDegree[prereqs[i][0]]++;
         }
     }
 
     let result = [];
     let queue = [];
-
-    for(let i=0;i<list.length;i++){
-        if(indegree[list[i].code] === 0){
-            queue.push(list[i]);
+    const courseMap = {};
+    
+    prev.forEach(p => {
+        if(indegree[p.code] === 0){
+            queue.push(p.code);
         }
-    }
+
+        courseMap[p.code] = p;
+    }); 
+    current.forEach(c => {
+        if(indegree[c.code] === 0){
+            queue.push(c.code);
+        }
+
+        courseMap[c.code] = c;
+    });
 
     while(queue.length !== 0){
-        let curr = queue.shift();
-        const { code } = curr;
-        
-        result.push({
-            code,
-            numPreqs: copy[code]
-        });
+        let code = queue.shift();
 
-        for(let i=0;i<adjList[code].length;i++){
-            indegree[adjList[code][i]]--;
+        result.push({code, course: courseMap[code], numPreqs: orgDegree[code]});
 
-            if(indegree[adjList[code][i]] === 0){
-                queue.push(courseMap[adjList[code][i]]);
+        for(let i=0;i<prereqs.length;i++){
+            if(prereqs[i][1] === code){
+                indegree[prereqs[i][0]]--;
+
+                if(indegree[prereqs[i][0]] === 0){
+                    queue.push(prereqs[i][0]);
+                }
             }
         }
     }

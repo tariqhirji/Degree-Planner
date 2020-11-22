@@ -10,7 +10,7 @@ class DepartmentInfo extends Component{
 
         this.state = {
             departments: [],
-            departmentName: null
+            departmentName: 'home'
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,7 @@ class DepartmentInfo extends Component{
                     <h1 className='mb-3'>Select a Department</h1>
 
                     <select onChange={this.handleChange} value={departmentName}>
-                        <option value=''></option>
+                        <option value='home'></option>
 
                         {departments.map(department =>
                             <option value={department.name} key={department.name}>
