@@ -14,7 +14,7 @@ import CourseInfo from './containers/CourseInfo';
 import Profile from './containers/Profile'
 import Home from './containers/Home'
 import DepartmentInfo from './containers/DepartmentInfo';
-import Courses from './containers/Courses';
+import CoursesPage from './containers/CoursesPage';
 
 class App extends Component{
    async componentDidMount(){
@@ -41,7 +41,7 @@ class App extends Component{
                   <Route exact path ='/change_password/:token' component={ChangePassword}/>
                   <Route exact path='/forgot_password' component={ForgotPassword}/> 
                   <Route exact path='/course/:id' component={CourseInfo}/>
-                  <Route exact path='/courses' component={Courses}/>
+                  <Route exact path='/courses' component={CoursesPage}/>
                   <Route path='/' component={DeadPage}/>
                </Switch>
             </BrowserRouter>
